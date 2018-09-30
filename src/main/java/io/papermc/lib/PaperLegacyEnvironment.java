@@ -1,4 +1,4 @@
-package io.papermc;
+package io.papermc.lib;
 
 import org.bukkit.Chunk;
 import org.bukkit.Location;

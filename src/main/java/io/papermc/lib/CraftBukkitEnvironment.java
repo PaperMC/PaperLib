@@ -1,4 +1,4 @@
-package io.papermc;
+package io.papermc.lib;
 
 public class CraftBukkitEnvironment extends Environment {
 

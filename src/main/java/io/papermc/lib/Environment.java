@@ -1,4 +1,4 @@
-package io.papermc;
+package io.papermc.lib;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
