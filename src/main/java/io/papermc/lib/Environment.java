@@ -42,6 +42,10 @@ public abstract class Environment {
     }
 
     public CompletableFuture<Chunk> getChunkAtAsync(World world, int x, int z, boolean gen) {
-        return CompletableFuture.completedFuture(world.getChunkAt(x, z));
+        if (!gen && getMinecraftVersion() >= 13 && !world.isChunkGenerated(x, z)) {
+            return CompletableFuture.completedFuture(null);
+        } else {
+            return CompletableFuture.completedFuture(world.getChunkAt(x, z));
+        }
     }
 }
