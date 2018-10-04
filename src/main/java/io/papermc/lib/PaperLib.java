@@ -89,7 +89,7 @@ public class PaperLib {
      *
      * @param blockState The blockState
      * @param force Whether to force the update
-     * @param applyPhysics Whether to apply physucs
+     * @param applyPhysics Whether to apply physics
      * @return If it succeeded
      */
     public boolean updateBlockState(BlockState blockState, boolean force, boolean applyPhysics) {
