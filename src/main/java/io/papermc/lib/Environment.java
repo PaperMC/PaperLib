@@ -55,19 +55,6 @@ public abstract class Environment {
         return block.getState();
     }
 
-    /**
-     * Update a block state if required.
-     *
-     * <p>
-     *     This is only useful if you're passing 'false' to useSnapshot
-     *     when creating the BlockState.
-     * </p>
-     *
-     * @param blockState The blockState
-     * @param force Whether to force the update
-     * @param applyPhysics Whether to apply physucs
-     * @return If it succeeded
-     */
     public boolean updateBlockState(BlockState blockState, boolean force, boolean applyPhysics) {
         return blockState.update(force, applyPhysics);
     }

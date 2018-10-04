@@ -3,6 +3,8 @@ package io.papermc.lib;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
 import org.bukkit.plugin.Plugin;
 
@@ -40,6 +42,58 @@ public class PaperLib {
 
     public static CompletableFuture<Chunk> getChunkAtAsync(World world, int x, int z, boolean gen) {
         return ENVIRONMENT.getChunkAtAsync(world, x, z, gen);
+    }
+
+    public BlockState getBlockState(Block block, boolean useSnapshot) {
+        return ENVIRONMENT.getBlockState(block, useSnapshot);
+    }
+
+    /**
+     * Update a block state if required.
+     *
+     * <p>
+     *     This is only useful if you're passing 'false' to useSnapshot
+     *     when creating the BlockState.
+     * </p>
+     *
+     * @param blockState The blockState
+     * @return If it succeeded
+     */
+    public boolean updateBlockState(BlockState blockState) {
+        return updateBlockState(blockState, false);
+    }
+
+    /**
+     * Update a block state if required.
+     *
+     * <p>
+     *     This is only useful if you're passing 'false' to useSnapshot
+     *     when creating the BlockState.
+     * </p>
+     *
+     * @param blockState The blockState
+     * @param force Whether to force the update
+     * @return If it succeeded
+     */
+    public boolean updateBlockState(BlockState blockState, boolean force) {
+        return updateBlockState(blockState, force, true);
+    }
+
+    /**
+     * Update a block state if required.
+     *
+     * <p>
+     *     This is only useful if you're passing 'false' to useSnapshot
+     *     when creating the BlockState.
+     * </p>
+     *
+     * @param blockState The blockState
+     * @param force Whether to force the update
+     * @param applyPhysics Whether to apply physucs
+     * @return If it succeeded
+     */
+    public boolean updateBlockState(BlockState blockState, boolean force, boolean applyPhysics) {
+        return ENVIRONMENT.updateBlockState(blockState, force, applyPhysics);
     }
 
     private static Environment initialize() {
