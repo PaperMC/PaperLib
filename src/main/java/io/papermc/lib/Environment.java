@@ -4,6 +4,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
 
 import java.util.concurrent.CompletableFuture;
@@ -47,5 +49,26 @@ public abstract class Environment {
         } else {
             return CompletableFuture.completedFuture(world.getChunkAt(x, z));
         }
+    }
+
+    public BlockState getBlockState(Block block, boolean useSnapshot) {
+        return block.getState();
+    }
+
+    /**
+     * Update a block state if required.
+     *
+     * <p>
+     *     This is only useful if you're passing 'false' to useSnapshot
+     *     when creating the BlockState.
+     * </p>
+     *
+     * @param blockState The blockState
+     * @param force Whether to force the update
+     * @param applyPhysics Whether to apply physucs
+     * @return If it succeeded
+     */
+    public boolean updateBlockState(BlockState blockState, boolean force, boolean applyPhysics) {
+        return blockState.update(force, applyPhysics);
     }
 }

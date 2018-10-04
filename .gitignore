@@ -10,13 +10,7 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
-.idea/workspace.xml
-.idea/dictionaries
-.idea/misc.xml
-.idea/libraries
-.idea/uiDesigner.xml
-.idea/kotlinc.xml
-.idea/modules.xml
+.idea/
 **/*.iml
 
 

@@ -3,6 +3,8 @@ package io.papermc.lib;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
 
 import java.util.concurrent.CompletableFuture;
@@ -36,5 +38,15 @@ public class PaperLegacyEnvironment extends SpigotEnvironment {
             world.getChunkAtAsync(x, z, chunkLoadCallback);
         }
         return future;
+    }
+
+    @Override
+    public BlockState getBlockState(Block block, boolean useSnapshot) {
+        return block.getState(useSnapshot);
+    }
+
+    @Override
+    public boolean updateBlockState(BlockState blockState, boolean force, boolean applyPhysics) {
+        return true;
     }
 }
