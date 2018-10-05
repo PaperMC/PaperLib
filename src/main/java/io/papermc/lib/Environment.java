@@ -54,8 +54,4 @@ public abstract class Environment {
     public BlockState getBlockState(Block block, boolean useSnapshot) {
         return block.getState();
     }
-
-    public boolean updateBlockState(BlockState blockState, boolean force, boolean applyPhysics) {
-        return blockState.update(force, applyPhysics);
-    }
 }

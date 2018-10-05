@@ -44,9 +44,4 @@ public class PaperLegacyEnvironment extends SpigotEnvironment {
     public BlockState getBlockState(Block block, boolean useSnapshot) {
         return block.getState(useSnapshot);
     }
-
-    @Override
-    public boolean updateBlockState(BlockState blockState, boolean force, boolean applyPhysics) {
-        return true;
-    }
 }
