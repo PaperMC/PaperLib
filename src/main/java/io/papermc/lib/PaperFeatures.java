@@ -39,6 +39,7 @@ public class PaperFeatures {
             return new BlockStateSnapshotResult(true, block.getState());
         }
     }
+
     public static class BlockStateSnapshotResult {
         private final boolean isSnapshot;
         private final BlockState state;
