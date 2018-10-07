@@ -3,6 +3,8 @@ package io.papermc.lib;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
 import org.bukkit.plugin.Plugin;
 
@@ -121,6 +123,16 @@ public class PaperLib {
      */
     public static boolean isChunkGenerated(World world, int x, int z) {
         return ENVIRONMENT.isChunkGenerated(world, x, z);
+    }
+
+    /**
+     * Get's a BlockState, optionally not using a snapshot
+     * @param block The block to get a State of
+     * @param useSnapshot Whether or not to use a snapshot when supported
+     * @return The BlockState
+     */
+    public PaperFeatures.BlockStateSnapshotResult getBlockState(Block block, boolean useSnapshot) {
+        return ENVIRONMENT.getBlockState(block, useSnapshot);
     }
 
     /**

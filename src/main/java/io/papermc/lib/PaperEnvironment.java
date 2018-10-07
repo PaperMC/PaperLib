@@ -15,6 +15,7 @@ public class PaperEnvironment extends Environment {
         if (isVersion(12)) {
             // Paper added this API in 1.12 with same signature spigot did in 1.13
             isGeneratedHandler = new ChunkIsGenerated_13();
+            blockStateSnapshotHandler = new BlockStateSnapshot_12();
         }
     }
 

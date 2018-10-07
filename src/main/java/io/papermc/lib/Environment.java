@@ -4,6 +4,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
 
 import java.util.concurrent.CompletableFuture;
@@ -20,6 +22,7 @@ public abstract class Environment {
     protected PaperFeatures.AsyncChunkLoad asyncChunkLoadHandler = new PaperFeatures.AsyncChunkLoad() {};
     protected PaperFeatures.AsyncTeleport asyncTeleportHandler = new PaperFeatures.AsyncTeleport() {};
     protected PaperFeatures.ChunkIsGenerated isGeneratedHandler = new PaperFeatures.ChunkIsGenerated() {};
+    protected PaperFeatures.BlockStateSnapshot blockStateSnapshotHandler;
 
     Environment() {
         Pattern versionPattern = Pattern.compile("\\(MC: (\\d)\\.(\\d+)\\.?(\\d+?)?\\)");
@@ -46,6 +49,11 @@ public abstract class Environment {
         if (isVersion(13, 1)) {
             isGeneratedHandler = new ChunkIsGenerated_13();
         }
+        if (!isVersion(12)) {
+            blockStateSnapshotHandler = new BlockStateSnapshot_11();
+        } else {
+            blockStateSnapshotHandler = new PaperFeatures.BlockStateSnapshot() {};
+        }
         // TODO: Reflection based?
     }
 
@@ -62,6 +70,11 @@ public abstract class Environment {
     public boolean isChunkGenerated(World world, int x, int z) {
         return isGeneratedHandler.isChunkGenerated(world, x, z);
     }
+
+    public PaperFeatures.BlockStateSnapshotResult getBlockState(Block block, boolean useSnapshot) {
+        return blockStateSnapshotHandler.getBlockState(block, useSnapshot);
+    }
+
     public boolean isVersion(int minor) {
         return isVersion(minor, 0);
     }
@@ -73,6 +86,7 @@ public abstract class Environment {
     public int getMinecraftVersion() {
         return minecraftVersion;
     }
+
     public int getMinecraftPatchVersion() {
         return minecraftVersion;
     }
@@ -80,5 +94,4 @@ public abstract class Environment {
     public boolean isPaper() {
         return false;
     }
-
 }
