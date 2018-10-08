@@ -1,2 +1,124 @@
 # PaperLib
 Plugin Library for interfacing with Paper Specific API's with graceful fallback that maintains Spigot Compatibility, such as Async Chunk Loading.
+
+## API
+All API can be found as static util methods on the `PaperLib` class.
+
+```java
+public static CompletableFuture<Chunk> getChunkAtAsync(Location loc)
+public static CompletableFuture<Chunk> getChunkAtAsync(Location loc, boolean gen)
+public static CompletableFuture<Chunk> getChunkAtAsync(World world, int x, int z)
+public static CompletableFuture<Chunk> getChunkAtAsync(World world, int x, int z, boolean gen)
+```
+On Paper, loads (or generates on 1.13.1+) the chunk asynchronously if it is not loaded yet, then completes the returned future.
+Chunk will load synchronous on Spigot.
+
+```java
+public static CompletableFuture<Boolean> teleportAsync(Entity entity, Location location)
+```
+Uses the Async Chunk Load API, and if possible, loads/generates the chunk asynchronously before teleporting.
+Will load synchronous on Spigot.
+
+```java
+public static boolean isChunkGenerated(Location loc)
+public static boolean isChunkGenerated(World world, int x, int z)
+```
+Returns whether or not the chunk is generated. Only Supported in Paper 1.12+ and Spigot 1.13.1+
+
+```java
+public static BlockStateSnapshotResult getBlockState(Block block, boolean useSnapshot)
+```
+
+Allows you to optionally avoid taking a snapshot of a TileEntity in a BlockState. Versions prior to 1.12 will always be
+false for the snapshot. In versions 1.12+ on Spigot, the snapshot will always be true. In Paper 1.12+, the snapshot will
+be whether or not you requested one in the API call.
+
+## Build Script Setup
+Add Repo and PaperLib, then Shade + Relocate it to your own package:
+
+**Gradle**
+Repo:
+```groovy
+repositories {
+    maven {
+        name 'papermc'
+        url 'https://papermc.io/repo/repository/maven-public/'
+    }
+}
+```
+
+Dependency:
+```groovy
+dependencies {
+    compile "io.papermc:paperlib:1.0.0"
+}
+```
+
+Shadow Jar and Relocate:
+```groovy
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath "com.github.jengelman.gradle.plugins:shadow:2.0.2"
+    }
+}
+apply plugin: "com.github.johnrengelman.shadow"
+shadowJar {
+   relocate 'io.papermc.lib', '[YOUR PLUGIN PACKAGE].paperlib'
+}
+```
+
+**Maven**
+Repo:
+```xml
+<repositories>
+    <repository>
+        <id>papermc</id>
+        <url>https://papermc.io/repo/repository/maven-public/</url>
+    </repository>
+</repositories>
+```
+Dependency:
+```xml
+<dependencies>
+    <dependency>
+        <groupId>io.papermc</groupId>
+        <artifactId>paperlib</artifactId>
+        <version>1.0.0</version>
+        <scope>compile</scope>
+     </dependency>
+ </dependencies>
+ ```
+ 
+Shade & Relocate:
+```xml
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-shade-plugin</artifactId>
+            <version>3.1.1</version>
+            <configuration>
+                <dependencyReducedPomLocation>${project.build.directory}/dependency-reduced-pom.xml</dependencyReducedPomLocation>
+                <relocations>
+                    <relocation>
+                        <pattern>io.papermc.lib</pattern>
+                        <shadedPattern>[YOUR PLUGIN PACKAGE].paperlib</shadedPattern> <!-- Replace this -->
+                    </relocation>
+                </relocations>
+            </configuration>
+            <executions>
+                <execution>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>shade</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+```

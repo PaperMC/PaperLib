@@ -135,7 +135,7 @@ public class PaperLib {
      * @param useSnapshot Whether or not to use a snapshot when supported
      * @return The BlockState
      */
-    public BlockStateSnapshotResult getBlockState(Block block, boolean useSnapshot) {
+    public static BlockStateSnapshotResult getBlockState(Block block, boolean useSnapshot) {
         return ENVIRONMENT.getBlockState(block, useSnapshot);
     }
 

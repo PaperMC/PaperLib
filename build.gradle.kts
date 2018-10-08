@@ -6,8 +6,10 @@ plugins {
 val javadoc by tasks.existing(Javadoc::class)
 val jar by tasks.existing
 
-group = "io.papermc.lib"
-version = "1.13.1-R0.1-SNAPSHOT"
+group = "io.papermc"
+version = "1.0.0-SNAPSHOT"
+
+val mcVersion = "1.13.1-R0.1-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -17,7 +19,7 @@ repositories {
 
 dependencies {
     compileOnly("com.google.code.findbugs:jsr305:1.3.9")
-    compileOnly("com.destroystokyo.paper:paper-api:$version")
+    compileOnly("com.destroystokyo.paper:paper-api:$mcVersion")
 }
 
 java {
