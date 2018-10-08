@@ -5,6 +5,7 @@ import io.papermc.lib.features.asyncchunks.AsyncChunksPaper_9_12;
 import io.papermc.lib.features.asyncteleport.AsyncTeleportPaper;
 import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotOptionalSnapshots;
 import io.papermc.lib.features.chunkisgenerated.ChunkIsGeneratedApiExists;
+import io.papermc.lib.features.profilesupport.ProfileSupportPaper;
 
 public class PaperEnvironment extends SpigotEnvironment {
 
@@ -22,6 +23,7 @@ public class PaperEnvironment extends SpigotEnvironment {
             // Paper added this API in 1.12 with same signature spigot did in 1.13
             isGeneratedHandler = new ChunkIsGeneratedApiExists();
             blockStateSnapshotHandler = new BlockStateSnapshotOptionalSnapshots();
+            profileSupportHandler = new ProfileSupportPaper();
         }
     }
 

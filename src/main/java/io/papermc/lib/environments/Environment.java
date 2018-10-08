@@ -11,6 +11,8 @@ import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotBeforeSnapsh
 import io.papermc.lib.features.chunkisgenerated.ChunkIsGenerated;
 import io.papermc.lib.features.chunkisgenerated.ChunkIsGeneratedApiExists;
 import io.papermc.lib.features.chunkisgenerated.ChunkIsGeneratedUnknown;
+import io.papermc.lib.features.profilesupport.ProfileSupport;
+import io.papermc.lib.features.profilesupport.ProfileSupportUnknown;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -18,6 +20,8 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 
+import java.io.IOException;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
@@ -32,6 +36,7 @@ public abstract class Environment {
     protected AsyncChunks asyncChunksHandler = new AsyncChunksSync();
     protected AsyncTeleport asyncTeleportHandler = new AsyncTeleportSync();
     protected ChunkIsGenerated isGeneratedHandler = new ChunkIsGeneratedUnknown();
+    protected ProfileSupport profileSupportHandler = new ProfileSupportUnknown();
     protected BlockStateSnapshot blockStateSnapshotHandler;
 
     public Environment() {
@@ -84,6 +89,14 @@ public abstract class Environment {
 
     public BlockStateSnapshotResult getBlockState(Block block, boolean useSnapshot) {
         return blockStateSnapshotHandler.getBlockState(block, useSnapshot);
+    }
+
+    public CompletableFuture<UUID> getPlayerUUIDAsync(String playerName) throws IOException {
+        return profileSupportHandler.getPlayerUUIDAsync(playerName);
+    }
+
+    public CompletableFuture<String> getPlayerNameAsync(UUID playerUUID) throws IOException {
+        return profileSupportHandler.getPlayerNameAsync(playerUUID);
     }
 
     public boolean isVersion(int minor) {

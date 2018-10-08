@@ -13,6 +13,8 @@ import org.bukkit.entity.Entity;
 import org.bukkit.plugin.Plugin;
 
 import javax.annotation.Nonnull;
+import java.io.IOException;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Logger;
 
@@ -145,6 +147,36 @@ public class PaperLib {
     @Nonnull
     public static BlockStateSnapshotResult getBlockState(@Nonnull Block block, boolean useSnapshot) {
         return ENVIRONMENT.getBlockState(block, useSnapshot);
+    }
+
+    /**
+     * Returns the UUID of a player found by name, or null
+     * if a player was not found by the name provided.
+     * If there was a rate-limit or other network error,
+     * an IOException will be thrown.
+     *
+     * @param playerName The name of the player to fetch
+     * @return The UUID of the specified player, or null if not found
+     * @throws IOException if there was a rate-limit or other network error
+     */
+    @Nonnull
+    public static CompletableFuture<UUID> getPlayerUUIDAsync(@Nonnull String playerName) throws IOException {
+        return ENVIRONMENT.getPlayerUUIDAsync(playerName);
+    }
+
+    /**
+     * Returns the name of a player found by UUID, or null
+     * if a player was not found by the UUID provided.
+     * If there was a rate-limit or other network error,
+     * an IOException will be thrown.
+     *
+     * @param playerUUID The UUID of the player to fetch
+     * @return The name of the specified player, or null if not found
+     * @throws IOException if there was a rate-limit or other network error
+     */
+    @Nonnull
+    public static CompletableFuture<String> getPlayerNameAsync(@Nonnull UUID playerUUID) throws IOException {
+        return ENVIRONMENT.getPlayerNameAsync(playerUUID);
     }
 
     /**
