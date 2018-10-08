@@ -12,6 +12,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.plugin.Plugin;
 
+import javax.annotation.Nonnull;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Logger;
 
@@ -45,6 +46,7 @@ public class PaperLib {
      *
      * @return The Environment
      */
+    @Nonnull
     public static Environment getEnvironment() {
         return ENVIRONMENT;
     }
@@ -53,7 +55,7 @@ public class PaperLib {
      * If you have need to inject a custom Environment, such as running on your own fork, or unit tests, do it here.
      * @param environment Custom Environment
      */
-    public static void setCustomEnvironment(Environment environment) {
+    public static void setCustomEnvironment(@Nonnull Environment environment) {
         ENVIRONMENT = environment;
     }
 
@@ -63,7 +65,8 @@ public class PaperLib {
      * @param location The Location to Teleport to
      * @return Future that completes with the result of the teleport
      */
-    public static CompletableFuture<Boolean> teleportAsync(Entity entity, Location location) {
+    @Nonnull
+    public static CompletableFuture<Boolean> teleportAsync(@Nonnull Entity entity, @Nonnull Location location) {
         return ENVIRONMENT.teleport(entity, location);
     }
 
@@ -72,7 +75,8 @@ public class PaperLib {
      * @param loc Location to get chunk for
      * @return Future that completes with the chunk
      */
-    public static CompletableFuture<Chunk> getChunkAtAsync(Location loc) {
+    @Nonnull
+    public static CompletableFuture<Chunk> getChunkAtAsync(@Nonnull Location loc) {
         return getChunkAtAsync(loc.getWorld(), loc.getBlockX() >> 4, loc.getBlockZ() >> 4, true);
     }
 
@@ -82,7 +86,8 @@ public class PaperLib {
      * @param gen Should the chunk generate or not. Only respected on some MC versions, 1.13 for CB, 1.12 for Paper
      * @return Future that completes with the chunk, or null if the chunk did not exists and generation was not requested.
      */
-    public static CompletableFuture<Chunk> getChunkAtAsync(Location loc, boolean gen) {
+    @Nonnull
+    public static CompletableFuture<Chunk> getChunkAtAsync(@Nonnull Location loc, boolean gen) {
         return getChunkAtAsync(loc.getWorld(), loc.getBlockX() >> 4, loc.getBlockZ() >> 4, gen);
     }
 
@@ -93,7 +98,8 @@ public class PaperLib {
      * @param z Z coordinate of the chunk to load
      * @return Future that completes with the chunk
      */
-    public static CompletableFuture<Chunk> getChunkAtAsync(World world, int x, int z) {
+    @Nonnull
+    public static CompletableFuture<Chunk> getChunkAtAsync(@Nonnull World world, int x, int z) {
         return getChunkAtAsync(world, x, z, true);
     }
 
@@ -105,7 +111,8 @@ public class PaperLib {
      * @param gen Should the chunk generate or not. Only respected on some MC versions, 1.13 for CB, 1.12 for Paper
      * @return Future that completes with the chunk, or null if the chunk did not exists and generation was not requested.
      */
-    public static CompletableFuture<Chunk> getChunkAtAsync(World world, int x, int z, boolean gen) {
+    @Nonnull
+    public static CompletableFuture<Chunk> getChunkAtAsync(@Nonnull World world, int x, int z, boolean gen) {
         return ENVIRONMENT.getChunkAtAsync(world, x, z, gen);
     }
 
@@ -114,7 +121,7 @@ public class PaperLib {
      * @param loc Location to check if the chunk is generated
      * @return If the chunk is generated or not
      */
-    public static boolean isChunkGenerated(Location loc) {
+    public static boolean isChunkGenerated(@Nonnull Location loc) {
         return isChunkGenerated(loc.getWorld(), loc.getBlockX() >> 4, loc.getBlockZ() >> 4);
     }
 
@@ -125,7 +132,7 @@ public class PaperLib {
      * @param z Z coordinate of the chunk to checl
      * @return If the chunk is generated or not
      */
-    public static boolean isChunkGenerated(World world, int x, int z) {
+    public static boolean isChunkGenerated(@Nonnull World world, int x, int z) {
         return ENVIRONMENT.isChunkGenerated(world, x, z);
     }
 
@@ -135,7 +142,8 @@ public class PaperLib {
      * @param useSnapshot Whether or not to use a snapshot when supported
      * @return The BlockState
      */
-    public static BlockStateSnapshotResult getBlockState(Block block, boolean useSnapshot) {
+    @Nonnull
+    public static BlockStateSnapshotResult getBlockState(@Nonnull Block block, boolean useSnapshot) {
         return ENVIRONMENT.getBlockState(block, useSnapshot);
     }
 
@@ -192,7 +200,7 @@ public class PaperLib {
      *
      * @param plugin Your plugin object
      */
-    public static void suggestPaper(Plugin plugin) {
+    public static void suggestPaper(@Nonnull Plugin plugin) {
         if (isPaper()) {
             return;
         }
