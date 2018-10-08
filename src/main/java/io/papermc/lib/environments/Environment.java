@@ -99,7 +99,7 @@ public abstract class Environment {
     }
 
     public int getMinecraftPatchVersion() {
-        return minecraftVersion;
+        return minecraftPatchVersion;
     }
 
     public boolean isPaper() {

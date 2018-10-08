@@ -23,6 +23,9 @@ import java.util.logging.Logger;
  */
 @SuppressWarnings("WeakerAccess")
 public class PaperLib {
+    private PaperLib() {
+        // Hide public constructor
+    }
 
     private static Environment ENVIRONMENT = initialize();
 
