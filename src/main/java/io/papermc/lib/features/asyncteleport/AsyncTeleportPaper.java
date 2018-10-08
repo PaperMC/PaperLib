@@ -1,11 +1,13 @@
-package io.papermc.lib;
+package io.papermc.lib.features.asyncteleport;
 
+import io.papermc.lib.PaperLib;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 
 import java.util.concurrent.CompletableFuture;
 
-class AsyncTeleport_9_12 implements PaperFeatures.AsyncTeleport {
+public class AsyncTeleportPaper implements AsyncTeleport {
+
     @Override
     public CompletableFuture<Boolean> teleportAsync(Entity entity, Location location) {
         int x = location.getBlockX() >> 4;

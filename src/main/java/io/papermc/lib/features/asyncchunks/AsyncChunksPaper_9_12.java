@@ -1,5 +1,6 @@
-package io.papermc.lib;
+package io.papermc.lib.features.asyncchunks;
 
+import io.papermc.lib.PaperLib;
 import org.bukkit.Chunk;
 import org.bukkit.World;
 
@@ -8,7 +9,7 @@ import java.util.concurrent.CompletableFuture;
 /**
  * Async Chunk Loading for Paper version 1.9 to 1.12
  */
-class AsyncChunkLoad_9_12 implements PaperFeatures.AsyncChunkLoad {
+public class AsyncChunksPaper_9_12 implements AsyncChunks {
     @Override
     public CompletableFuture<Chunk> getChunkAtAsync(World world, int x, int z, boolean gen) {
         CompletableFuture<Chunk> future = new CompletableFuture<>();

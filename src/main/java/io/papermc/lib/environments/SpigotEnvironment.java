@@ -1,6 +1,6 @@
-package io.papermc.lib;
+package io.papermc.lib.environments;
 
-public class SpigotEnvironment extends Environment {
+public class SpigotEnvironment extends CraftBukkitEnvironment {
 
     public SpigotEnvironment() {
         super();

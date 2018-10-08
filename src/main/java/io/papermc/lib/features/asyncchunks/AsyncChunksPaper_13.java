@@ -1,11 +1,11 @@
-package io.papermc.lib;
+package io.papermc.lib.features.asyncchunks;
 
 import org.bukkit.Chunk;
 import org.bukkit.World;
 
 import java.util.concurrent.CompletableFuture;
 
-class AsyncChunkLoad_13 implements PaperFeatures.AsyncChunkLoad {
+public class AsyncChunksPaper_13 implements AsyncChunks {
     @Override
     public CompletableFuture<Chunk> getChunkAtAsync(World world, int x, int z, boolean gen) {
         return world.getChunkAtAsync(x, z, gen);

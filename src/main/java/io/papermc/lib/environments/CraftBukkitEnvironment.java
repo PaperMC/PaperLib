@@ -1,10 +1,6 @@
-package io.papermc.lib;
+package io.papermc.lib.environments;
 
 public class CraftBukkitEnvironment extends Environment {
-
-    CraftBukkitEnvironment() {
-        super();
-    }
 
     @Override
     public String getName() {

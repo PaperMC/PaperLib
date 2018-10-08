@@ -1,10 +1,14 @@
 package io.papermc.lib;
 
+import io.papermc.lib.environments.CraftBukkitEnvironment;
+import io.papermc.lib.environments.Environment;
+import io.papermc.lib.environments.PaperEnvironment;
+import io.papermc.lib.environments.SpigotEnvironment;
+import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotResult;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
 import org.bukkit.plugin.Plugin;
 
@@ -131,7 +135,7 @@ public class PaperLib {
      * @param useSnapshot Whether or not to use a snapshot when supported
      * @return The BlockState
      */
-    public PaperFeatures.BlockStateSnapshotResult getBlockState(Block block, boolean useSnapshot) {
+    public BlockStateSnapshotResult getBlockState(Block block, boolean useSnapshot) {
         return ENVIRONMENT.getBlockState(block, useSnapshot);
     }
 
