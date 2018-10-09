@@ -91,12 +91,12 @@ public abstract class Environment {
         return blockStateSnapshotHandler.getBlockState(block, useSnapshot);
     }
 
-    public CompletableFuture<UUID> getPlayerUUIDAsync(String playerName) throws IOException {
-        return profileSupportHandler.getPlayerUUIDAsync(playerName);
+    public CompletableFuture<UUID> getPlayerUUID(String playerName) throws IOException {
+        return profileSupportHandler.getPlayerUUID(playerName);
     }
 
-    public CompletableFuture<String> getPlayerNameAsync(UUID playerUUID) throws IOException {
-        return profileSupportHandler.getPlayerNameAsync(playerUUID);
+    public CompletableFuture<String> getPlayerName(UUID playerUUID) throws IOException {
+        return profileSupportHandler.getPlayerName(playerUUID);
     }
 
     public boolean isVersion(int minor) {

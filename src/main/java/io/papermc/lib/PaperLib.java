@@ -160,8 +160,8 @@ public class PaperLib {
      * @throws IOException if there was a rate-limit or other network error
      */
     @Nonnull
-    public static CompletableFuture<UUID> getPlayerUUIDAsync(@Nonnull String playerName) throws IOException {
-        return ENVIRONMENT.getPlayerUUIDAsync(playerName);
+    public static CompletableFuture<UUID> getPlayerUUID(@Nonnull String playerName) throws IOException {
+        return ENVIRONMENT.getPlayerUUID(playerName);
     }
 
     /**
@@ -175,8 +175,8 @@ public class PaperLib {
      * @throws IOException if there was a rate-limit or other network error
      */
     @Nonnull
-    public static CompletableFuture<String> getPlayerNameAsync(@Nonnull UUID playerUUID) throws IOException {
-        return ENVIRONMENT.getPlayerNameAsync(playerUUID);
+    public static CompletableFuture<String> getPlayerName(@Nonnull UUID playerUUID) throws IOException {
+        return ENVIRONMENT.getPlayerName(playerUUID);
     }
 
     /**

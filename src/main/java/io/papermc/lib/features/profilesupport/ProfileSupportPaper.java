@@ -8,7 +8,7 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 public class ProfileSupportPaper implements ProfileSupport {
-    public CompletableFuture<UUID> getPlayerUUIDAsync(String playerName) throws IOException {
+    public CompletableFuture<UUID> getPlayerUUID(String playerName) throws IOException {
         PlayerProfile profile = Bukkit.createProfile(playerName);
         if (profile.isComplete() || profile.completeFromCache()) {
             return CompletableFuture.completedFuture(profile.getId());
@@ -20,7 +20,7 @@ public class ProfileSupportPaper implements ProfileSupport {
         });
     }
 
-    public CompletableFuture<String> getPlayerNameAsync(UUID playerUUID) throws IOException {
+    public CompletableFuture<String> getPlayerName(UUID playerUUID) throws IOException {
         PlayerProfile profile = Bukkit.createProfile(playerUUID);
         if (profile.isComplete() || profile.completeFromCache()) {
             return CompletableFuture.completedFuture(profile.getName());

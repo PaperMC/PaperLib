@@ -5,7 +5,7 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 public interface ProfileSupport {
-    CompletableFuture<UUID> getPlayerUUIDAsync(String playerName) throws IOException;
+    CompletableFuture<UUID> getPlayerUUID(String playerName) throws IOException;
 
-    CompletableFuture<String> getPlayerNameAsync(UUID playerUUID) throws IOException;
+    CompletableFuture<String> getPlayerName(UUID playerUUID) throws IOException;
 }
