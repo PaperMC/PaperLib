@@ -10,4 +10,10 @@ public class SpigotEnvironment extends CraftBukkitEnvironment {
     public String getName() {
         return "Spigot";
     }
+
+    @Override
+    public boolean isSpigot() {
+        return true;
+    }
+
 }
