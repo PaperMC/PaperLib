@@ -5,9 +5,9 @@ import io.papermc.lib.features.asyncchunks.AsyncChunksSync;
 import io.papermc.lib.features.asyncteleport.AsyncTeleport;
 import io.papermc.lib.features.asyncteleport.AsyncTeleportSync;
 import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshot;
+import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotBeforeSnapshots;
 import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotNoOption;
 import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotResult;
-import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotBeforeSnapshots;
 import io.papermc.lib.features.chunkisgenerated.ChunkIsGenerated;
 import io.papermc.lib.features.chunkisgenerated.ChunkIsGeneratedApiExists;
 import io.papermc.lib.features.chunkisgenerated.ChunkIsGeneratedUnknown;
@@ -100,6 +100,10 @@ public abstract class Environment {
 
     public int getMinecraftPatchVersion() {
         return minecraftPatchVersion;
+    }
+
+    public boolean isSpigot() {
+        return false;
     }
 
     public boolean isPaper() {

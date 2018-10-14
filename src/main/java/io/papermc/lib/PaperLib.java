@@ -189,7 +189,16 @@ public class PaperLib {
     }
 
     /**
-     * @return If the server is running Paper or not
+     * Check if the server has access to the Spigot API
+     * @return True for Spigot <em>and</em> Paper environments
+     */
+    public static boolean isSpigot() {
+        return ENVIRONMENT.isSpigot();
+    }
+
+    /**
+     * Check if the server has access to the Paper API
+     * @return True for Paper environments
      */
     public static boolean isPaper() {
         return ENVIRONMENT.isPaper();
