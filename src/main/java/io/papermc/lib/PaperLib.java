@@ -10,6 +10,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
+import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.plugin.Plugin;
 
 import javax.annotation.Nonnull;
@@ -70,7 +71,19 @@ public class PaperLib {
      */
     @Nonnull
     public static CompletableFuture<Boolean> teleportAsync(@Nonnull Entity entity, @Nonnull Location location) {
-        return ENVIRONMENT.teleport(entity, location);
+        return ENVIRONMENT.teleport(entity, location, TeleportCause.PLUGIN);
+    }
+
+    /**
+     * Teleports an Entity to the target location, loading the chunk asynchronously first if needed.
+     * @param entity The Entity to teleport
+     * @param location The Location to Teleport to
+     * @param cause The cause for the teleportation
+     * @return Future that completes with the result of the teleport
+     */
+    @Nonnull
+    public static CompletableFuture<Boolean> teleportAsync(@Nonnull Entity entity, @Nonnull Location location, TeleportCause cause) {
+        return ENVIRONMENT.teleport(entity, location, cause);
     }
 
     /**

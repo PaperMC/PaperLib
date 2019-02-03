@@ -2,15 +2,15 @@
 PaperLib is a plugin library for interfacing with Paper specific APIs (such as async chunk loading), with graceful fallbacks maintaining compatibility with both the Bukkit and Spigot API's.
 
 ## API
-All API can be found as static util methods on the `PaperLib` class.
+All API calls can be found as static util methods in the `PaperLib` class.
 
 ### getChunkAtAsync
 ```java
 public class PaperLib {
-public static CompletableFuture<Chunk> getChunkAtAsync(Location loc);
-public static CompletableFuture<Chunk> getChunkAtAsync(Location loc, boolean gen);
-public static CompletableFuture<Chunk> getChunkAtAsync(World world, int x, int z);
-public static CompletableFuture<Chunk> getChunkAtAsync(World world, int x, int z, boolean gen); 
+  public static CompletableFuture<Chunk> getChunkAtAsync(Location loc);
+  public static CompletableFuture<Chunk> getChunkAtAsync(Location loc, boolean gen);
+  public static CompletableFuture<Chunk> getChunkAtAsync(World world, int x, int z);
+  public static CompletableFuture<Chunk> getChunkAtAsync(World world, int x, int z, boolean gen); 
 }
 ```
 On Paper, loads (or generates on 1.13.1+) the chunk asynchronously if it is not loaded yet, then completes the returned future.
@@ -19,7 +19,8 @@ Chunk will load synchronous on Spigot.
 ### teleportAsync
 ```java
 public class PaperLib {
-public static CompletableFuture<Boolean> teleportAsync(Entity entity, Location location);
+  public static CompletableFuture<Boolean> teleportAsync(Entity entity, Location location);
+  public static CompletableFuture<Boolean> teleportAsync(Entity entity, Location location, TeleportCause cause);
 }
 ```
 Uses the Async Chunk Load API, and if possible, loads/generates the chunk asynchronously before teleporting.
@@ -28,8 +29,8 @@ Will load synchronous on Spigot.
 ### isChunkGenerated
 ```java
 public class PaperLib {
-public static boolean isChunkGenerated(Location loc);
-public static boolean isChunkGenerated(World world, int x, int z);
+  public static boolean isChunkGenerated(Location loc);
+  public static boolean isChunkGenerated(World world, int x, int z);
 }
 ```
 Returns whether or not the chunk is generated. Only Supported in Paper 1.12+ and Spigot 1.13.1+
@@ -37,7 +38,7 @@ Returns whether or not the chunk is generated. Only Supported in Paper 1.12+ and
 ### getBlockState
 ```java
 public class PaperLib {
-public static BlockStateSnapshotResult getBlockState(Block block, boolean useSnapshot);
+  public static BlockStateSnapshotResult getBlockState(Block block, boolean useSnapshot);
 }
 ```
 
@@ -48,11 +49,11 @@ be whether or not you requested one in the API call.
 ### suggestPaper
 ```java
 public class PaperLib {
-public static void suggestPaper(Plugin plugin);
+  public static void suggestPaper(Plugin plugin);
 }
 ```
-Help inform users who run your plugin on Spigot that your plugin will behave better on Paper! Calling this method
-will print an informational message in the logs that they should switch to Paper, and will help users discover
+Helps inform users who run your plugin on Spigot that your plugin will behave better on Paper! Calling this method
+will print out an informational message in the logs that they should switch to Paper, and will help users discover
 our software. We would appreciate it if you call this method, but it is optional.
 
 ## Example Plugin
@@ -75,7 +76,7 @@ public class MyPlugin extends JavaPlugin {
 ```
 
 ## Build Script Setup
-Add Repo and PaperLib, then Shade + Relocate it to your own package.
+Add the Paper repository and the PaperLib dependency, then shade and relocate it to your own package.
 Relocation helps avoid version conflicts with other plugins using PaperLib. 
 
 ### Gradle
@@ -167,5 +168,5 @@ Shade & Relocate:
 ```
 
 ## License
-PaperLib is licensed [MIT](LICENSE)
+PaperLib is licensed under the [MIT license](LICENSE)
 

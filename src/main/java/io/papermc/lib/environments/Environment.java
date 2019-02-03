@@ -17,6 +17,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
+import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.regex.MatchResult;
@@ -74,8 +75,8 @@ public abstract class Environment {
         return asyncChunksHandler.getChunkAtAsync(world, x, z, gen);
     }
 
-    public CompletableFuture<Boolean> teleport(Entity entity, Location location) {
-        return asyncTeleportHandler.teleportAsync(entity, location);
+    public CompletableFuture<Boolean> teleport(Entity entity, Location location, TeleportCause cause) {
+        return asyncTeleportHandler.teleportAsync(entity, location, cause);
     }
 
     public boolean isChunkGenerated(World world, int x, int z) {
