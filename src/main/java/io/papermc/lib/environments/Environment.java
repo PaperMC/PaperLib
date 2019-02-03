@@ -43,12 +43,12 @@ public abstract class Environment {
         if (matcher.find()) {
             MatchResult matchResult = matcher.toMatchResult();
             try {
-                version = Integer.parseInt(matchResult.group(2), 0);
+                version = Integer.parseInt(matchResult.group(2), 10);
             } catch (Exception ignored) {
             }
             if (matchResult.groupCount() >= 3) {
                 try {
-                    patchVersion = Integer.parseInt(matchResult.group(3), 0);
+                    patchVersion = Integer.parseInt(matchResult.group(3), 10);
                 } catch (Exception ignored) {
                 }
             }
