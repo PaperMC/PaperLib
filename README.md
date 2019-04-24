@@ -166,6 +166,7 @@ Shade & Relocate:
     </plugins>
 </build>
 ```
+[What to do if you just added PaperLib to your project and get more than just PaperLib shaded into your jar](README-maven-shader.md)
 
 ## License
 PaperLib is licensed under the [MIT license](LICENSE)
