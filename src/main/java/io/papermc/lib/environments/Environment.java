@@ -57,7 +57,7 @@ public abstract class Environment {
         this.minecraftPatchVersion = patchVersion;
 
         // Common to all environments
-        if (isVersion(13, 1)) {
+        if (isVersion(13, 1) || isVersion(14, 3)) {
             isGeneratedHandler = new ChunkIsGeneratedApiExists();
         } else {
             // TODO: Reflection based?

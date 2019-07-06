@@ -11,7 +11,7 @@ public class PaperEnvironment extends SpigotEnvironment {
     public PaperEnvironment() {
         super();
 
-        if (isVersion(13, 1)) {
+        if (isVersion(13, 1) || isVersion(14, 3)) {
             asyncChunksHandler = new AsyncChunksPaper_13();
             asyncTeleportHandler = new AsyncTeleportPaper();
         } else if (isVersion(9) && !isVersion(13)) {
