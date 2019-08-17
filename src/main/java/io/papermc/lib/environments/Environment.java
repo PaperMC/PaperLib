@@ -11,6 +11,11 @@ import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotResult;
 import io.papermc.lib.features.chunkisgenerated.ChunkIsGenerated;
 import io.papermc.lib.features.chunkisgenerated.ChunkIsGeneratedApiExists;
 import io.papermc.lib.features.chunkisgenerated.ChunkIsGeneratedUnknown;
+import io.papermc.lib.features.playerprofile.BukkitPlayerInfo;
+import io.papermc.lib.features.playerprofile.PaperPlayerInfo;
+import io.papermc.lib.features.playerprofile.PlayerInfo;
+import java.io.IOException;
+import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -34,6 +39,7 @@ public abstract class Environment {
     protected AsyncTeleport asyncTeleportHandler = new AsyncTeleportSync();
     protected ChunkIsGenerated isGeneratedHandler = new ChunkIsGeneratedUnknown();
     protected BlockStateSnapshot blockStateSnapshotHandler;
+    protected boolean hasPlayerProfile = true;
 
     public Environment() {
         Pattern versionPattern = Pattern.compile("\\(MC: (\\d)\\.(\\d+)\\.?(\\d+?)?\\)");
@@ -67,6 +73,12 @@ public abstract class Environment {
         } else {
             blockStateSnapshotHandler = new BlockStateSnapshotNoOption();
         }
+
+        try {
+            Class.forName("com.destroystokyo.paper.profile.PlayerProfile");
+        } catch (ClassNotFoundException ignored) {
+            hasPlayerProfile = false;
+        }
     }
 
     public abstract String getName();
@@ -85,6 +97,14 @@ public abstract class Environment {
 
     public BlockStateSnapshotResult getBlockState(Block block, boolean useSnapshot) {
         return blockStateSnapshotHandler.getBlockState(block, useSnapshot);
+    }
+
+    public PlayerInfo getPlayerInfo(String playerName) throws IOException {
+        return (hasPlayerProfile) ? new PaperPlayerInfo(playerName) : new BukkitPlayerInfo(playerName);
+    }
+
+    public PlayerInfo getPlayerInfo(UUID playerUUID) throws IOException {
+        return (hasPlayerProfile) ? new PaperPlayerInfo(playerUUID) : new BukkitPlayerInfo(playerUUID);
     }
 
     public boolean isVersion(int minor) {
