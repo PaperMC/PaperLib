@@ -9,7 +9,7 @@ import java.util.concurrent.CompletableFuture;
 public class AsyncChunksSync implements AsyncChunks {
 
     @Override
-    public CompletableFuture<Chunk> getChunkAtAsync(World world, int x, int z, boolean gen) {
+    public CompletableFuture<Chunk> getChunkAtAsync(World world, int x, int z, boolean gen, boolean isUrgent) {
         if (!gen && !PaperLib.isChunkGenerated(world, x, z)) {
             return CompletableFuture.completedFuture(null);
         } else {

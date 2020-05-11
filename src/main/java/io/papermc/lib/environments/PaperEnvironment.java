@@ -1,10 +1,13 @@
 package io.papermc.lib.environments;
 
 import io.papermc.lib.features.asyncchunks.AsyncChunksPaper_13;
+import io.papermc.lib.features.asyncchunks.AsyncChunksPaper_15;
 import io.papermc.lib.features.asyncchunks.AsyncChunksPaper_9_12;
 import io.papermc.lib.features.asyncteleport.AsyncTeleportPaper;
 import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotOptionalSnapshots;
 import io.papermc.lib.features.chunkisgenerated.ChunkIsGeneratedApiExists;
+import org.bukkit.Location;
+import org.bukkit.World;
 
 public class PaperEnvironment extends SpigotEnvironment {
 
@@ -22,6 +25,13 @@ public class PaperEnvironment extends SpigotEnvironment {
             // Paper added this API in 1.12 with same signature spigot did in 1.13
             isGeneratedHandler = new ChunkIsGeneratedApiExists();
             blockStateSnapshotHandler = new BlockStateSnapshotOptionalSnapshots();
+        }
+        if (isVersion(15, 2)) {
+            try {
+                // Try for new Urgent API in 1.15.2+, Teleport will automatically benefit from this
+                World.class.getDeclaredMethod("getChunkAtAsyncUrgently", Location.class);
+                asyncChunksHandler = new AsyncChunksPaper_15();
+            } catch (NoSuchMethodException ignored) {}
         }
     }
 

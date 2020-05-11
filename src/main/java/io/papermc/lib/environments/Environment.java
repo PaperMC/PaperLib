@@ -72,7 +72,15 @@ public abstract class Environment {
     public abstract String getName();
 
     public CompletableFuture<Chunk> getChunkAtAsync(World world, int x, int z, boolean gen) {
-        return asyncChunksHandler.getChunkAtAsync(world, x, z, gen);
+        return asyncChunksHandler.getChunkAtAsync(world, x, z, gen, false);
+    }
+
+    public CompletableFuture<Chunk> getChunkAtAsync(World world, int x, int z, boolean gen, boolean isUrgent) {
+        return asyncChunksHandler.getChunkAtAsync(world, x, z, gen, isUrgent);
+    }
+
+    public CompletableFuture<Chunk> getChunkAtAsyncUrgently(World world, int x, int z, boolean gen) {
+        return asyncChunksHandler.getChunkAtAsync(world, x, z, gen, true);
     }
 
     public CompletableFuture<Boolean> teleport(Entity entity, Location location, TeleportCause cause) {

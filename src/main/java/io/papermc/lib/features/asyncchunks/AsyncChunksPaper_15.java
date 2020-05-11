@@ -5,9 +5,9 @@ import org.bukkit.World;
 
 import java.util.concurrent.CompletableFuture;
 
-public class AsyncChunksPaper_13 implements AsyncChunks {
+public class AsyncChunksPaper_15 implements AsyncChunks {
     @Override
     public CompletableFuture<Chunk> getChunkAtAsync(World world, int x, int z, boolean gen, boolean isUrgent) {
-        return world.getChunkAtAsync(x, z, gen);
+        return world.getChunkAtAsync(x, z, gen, isUrgent);
     }
 }

@@ -11,7 +11,7 @@ import java.util.concurrent.CompletableFuture;
  */
 public class AsyncChunksPaper_9_12 implements AsyncChunks {
     @Override
-    public CompletableFuture<Chunk> getChunkAtAsync(World world, int x, int z, boolean gen) {
+    public CompletableFuture<Chunk> getChunkAtAsync(World world, int x, int z, boolean gen, boolean isUrgent) {
         CompletableFuture<Chunk> future = new CompletableFuture<>();
         if (!gen && PaperLib.getMinecraftVersion() >= 12 && !world.isChunkGenerated(x, z)) {
             future.complete(null);

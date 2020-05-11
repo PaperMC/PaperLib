@@ -6,5 +6,8 @@ import org.bukkit.World;
 import java.util.concurrent.CompletableFuture;
 
 public interface AsyncChunks {
-    CompletableFuture<Chunk> getChunkAtAsync(World world, int x, int z, boolean gen);
+    default CompletableFuture<Chunk> getChunkAtAsync(World world, int x, int z, boolean gen) {
+        return getChunkAtAsync(world, x, z, gen, false);
+    }
+    CompletableFuture<Chunk> getChunkAtAsync(World world, int x, int z, boolean gen, boolean isUrgent);
 }

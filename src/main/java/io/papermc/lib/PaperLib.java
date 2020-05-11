@@ -129,7 +129,33 @@ public class PaperLib {
      */
     @Nonnull
     public static CompletableFuture<Chunk> getChunkAtAsync(@Nonnull World world, int x, int z, boolean gen) {
-        return ENVIRONMENT.getChunkAtAsync(world, x, z, gen);
+        return ENVIRONMENT.getChunkAtAsync(world, x, z, gen, false);
+    }
+
+    /**
+     * Gets the chunk at the target location, loading it asynchronously if needed.
+     * @param world World to load chunk for
+     * @param x X coordinate of the chunk to load
+     * @param z Z coordinate of the chunk to load
+     * @param gen Should the chunk generate or not. Only respected on some MC versions, 1.13 for CB, 1.12 for Paper
+     * @return Future that completes with the chunk, or null if the chunk did not exists and generation was not requested.
+     */
+    @Nonnull
+    public static CompletableFuture<Chunk> getChunkAtAsync(@Nonnull World world, int x, int z, boolean gen, boolean isUrgent) {
+        return ENVIRONMENT.getChunkAtAsync(world, x, z, gen, isUrgent);
+    }
+
+    /**
+     * Gets the chunk at the target location, loading it asynchronously if needed, with highest priority if supported
+     * @param world World to load chunk for
+     * @param x X coordinate of the chunk to load
+     * @param z Z coordinate of the chunk to load
+     * @param gen Should the chunk generate or not. Only respected on some MC versions, 1.13 for CB, 1.12 for Paper
+     * @return Future that completes with the chunk, or null if the chunk did not exists and generation was not requested.
+     */
+    @Nonnull
+    public static CompletableFuture<Chunk> getChunkAtAsyncUrgently(@Nonnull World world, int x, int z, boolean gen) {
+        return ENVIRONMENT.getChunkAtAsync(world, x, z, gen, true);
     }
 
     /**
