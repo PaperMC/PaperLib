@@ -5,6 +5,9 @@ import io.papermc.lib.environments.Environment;
 import io.papermc.lib.environments.PaperEnvironment;
 import io.papermc.lib.environments.SpigotEnvironment;
 import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotResult;
+import io.papermc.lib.features.playerprofile.PlayerInfo;
+import java.io.IOException;
+import java.util.UUID;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -187,6 +190,34 @@ public class PaperLib {
     @Nonnull
     public static BlockStateSnapshotResult getBlockState(@Nonnull Block block, boolean useSnapshot) {
         return ENVIRONMENT.getBlockState(block, useSnapshot);
+    }
+
+    /**
+     * Gets information about a potentially offline player, such as their current name or UUID.
+     * Note: Calling this method may contact Mojang's API and will block the current thread with the web request if it does.
+     * Additionally, it's possible that the name or UUID returned is null and/or an IOException is thrown.
+     *
+     * @param playerName The real name of the player to get
+     * @return A PlayerInfo object containing information about a player
+     * @throws IOException Thrown when an IOException is encountered while querying the Mojang API.
+     */
+    @Nonnull
+    public static PlayerInfo getPlayerInfo(@Nonnull String playerName) throws IOException {
+        return ENVIRONMENT.getPlayerInfo(playerName);
+    }
+
+    /**
+     * Gets information about a potentially offline player, such as their current name or UUID.
+     * Note: Calling this method may contact Mojang's API and will block the current thread with the web request if it does.
+     * Additionally, it's possible that the name or UUID returned is null and/or an IOException is thrown.
+     *
+     * @param playerUUID The UUID of the player to get
+     * @return A PlayerInfo object containing information about a player
+     * @throws IOException Thrown when an IOException is encountered while querying the Mojang API.
+     */
+    @Nonnull
+    public static PlayerInfo getPlayerInfo(@Nonnull UUID playerUUID) throws IOException {
+        return ENVIRONMENT.getPlayerInfo(playerUUID);
     }
 
     /**
