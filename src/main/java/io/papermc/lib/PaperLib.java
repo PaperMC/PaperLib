@@ -10,6 +10,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.plugin.Plugin;
 
@@ -187,6 +188,17 @@ public class PaperLib {
     @Nonnull
     public static BlockStateSnapshotResult getBlockState(@Nonnull Block block, boolean useSnapshot) {
         return ENVIRONMENT.getBlockState(block, useSnapshot);
+    }
+
+    /**
+     * Gets the location where the target player will spawn at their bed, asynchronously if needed
+     * @param player   The player whose bed spawn location to get.
+     * @param isUrgent Whether or not this should be performed with highest priority when supported
+     * @return Future that completes with the location of the bed spawn location, or null if the player
+     * has not slept in a bed or if the bed spawn is invalid.
+     */
+    public static CompletableFuture<Location> getBedSpawnLocationAsync(@Nonnull Player player, boolean isUrgent) {
+        return ENVIRONMENT.getBedSpawnLocationAsync(player, isUrgent);
     }
 
     /**
