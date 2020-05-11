@@ -14,11 +14,6 @@ public class BedSpawnLocationPaper implements BedSpawnLocation {
         if (bedLocation == null) {
             return CompletableFuture.completedFuture(null);
         }
-        CompletableFuture<Location> future = new CompletableFuture<>();
-        PaperLib.getChunkAtAsync(bedLocation.getWorld(), bedLocation.getBlockX(), bedLocation.getBlockZ(), false, isUrgent).thenAccept(chunk -> future.complete(player.getBedSpawnLocation())).exceptionally(ex -> {
-            future.completeExceptionally(ex);
-            return null;
-        });
-        return future;
+        return PaperLib.getChunkAtAsync(bedLocation.getWorld(), bedLocation.getBlockX() >> 4, bedLocation.getBlockZ() >> 4, false, isUrgent).thenCompose(chunk -> CompletableFuture.completedFuture(player.getBedSpawnLocation()));
     }
 }
