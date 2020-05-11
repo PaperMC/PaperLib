@@ -4,6 +4,8 @@ import io.papermc.lib.features.asyncchunks.AsyncChunks;
 import io.papermc.lib.features.asyncchunks.AsyncChunksSync;
 import io.papermc.lib.features.asyncteleport.AsyncTeleport;
 import io.papermc.lib.features.asyncteleport.AsyncTeleportSync;
+import io.papermc.lib.features.bedspawnlocation.BedSpawnLocation;
+import io.papermc.lib.features.bedspawnlocation.BedSpawnLocationSync;
 import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshot;
 import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotBeforeSnapshots;
 import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotNoOption;
@@ -17,8 +19,10 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
+import javax.annotation.Nonnull;
 import java.util.concurrent.CompletableFuture;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
@@ -34,6 +38,7 @@ public abstract class Environment {
     protected AsyncTeleport asyncTeleportHandler = new AsyncTeleportSync();
     protected ChunkIsGenerated isGeneratedHandler = new ChunkIsGeneratedUnknown();
     protected BlockStateSnapshot blockStateSnapshotHandler;
+    protected BedSpawnLocation bedSpawnLocationHandler = new BedSpawnLocationSync();
 
     public Environment() {
         Pattern versionPattern = Pattern.compile("\\(MC: (\\d)\\.(\\d+)\\.?(\\d+?)?\\)");
@@ -93,6 +98,10 @@ public abstract class Environment {
 
     public BlockStateSnapshotResult getBlockState(Block block, boolean useSnapshot) {
         return blockStateSnapshotHandler.getBlockState(block, useSnapshot);
+    }
+
+    public CompletableFuture<Location> getBedSpawnLocationAsync(Player player, boolean isUrgent) {
+        return bedSpawnLocationHandler.getBedSpawnLocationAsync(player, isUrgent);
     }
 
     public boolean isVersion(int minor) {

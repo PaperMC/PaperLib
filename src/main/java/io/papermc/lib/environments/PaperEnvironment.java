@@ -4,10 +4,12 @@ import io.papermc.lib.features.asyncchunks.AsyncChunksPaper_13;
 import io.papermc.lib.features.asyncchunks.AsyncChunksPaper_15;
 import io.papermc.lib.features.asyncchunks.AsyncChunksPaper_9_12;
 import io.papermc.lib.features.asyncteleport.AsyncTeleportPaper;
+import io.papermc.lib.features.bedspawnlocation.BedSpawnLocationPaper;
 import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotOptionalSnapshots;
 import io.papermc.lib.features.chunkisgenerated.ChunkIsGeneratedApiExists;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.HumanEntity;
 
 public class PaperEnvironment extends SpigotEnvironment {
 
@@ -31,6 +33,8 @@ public class PaperEnvironment extends SpigotEnvironment {
                 // Try for new Urgent API in 1.15.2+, Teleport will automatically benefit from this
                 World.class.getDeclaredMethod("getChunkAtAsyncUrgently", Location.class);
                 asyncChunksHandler = new AsyncChunksPaper_15();
+                HumanEntity.class.getDeclaredMethod("getPotentialBedLocation");
+                bedSpawnLocationHandler = new BedSpawnLocationPaper();
             } catch (NoSuchMethodException ignored) {}
         }
     }
