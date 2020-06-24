@@ -7,7 +7,7 @@ val javadoc by tasks.existing(Javadoc::class)
 val jar by tasks.existing
 
 group = "io.papermc"
-version = "1.0.4"
+version = "1.0.5-SNAPSHOT"
 
 val mcVersion = "1.15.2-R0.1-SNAPSHOT"
 
