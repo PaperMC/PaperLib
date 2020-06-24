@@ -4,6 +4,7 @@ import io.papermc.lib.features.asyncchunks.AsyncChunksPaper_13;
 import io.papermc.lib.features.asyncchunks.AsyncChunksPaper_15;
 import io.papermc.lib.features.asyncchunks.AsyncChunksPaper_9_12;
 import io.papermc.lib.features.asyncteleport.AsyncTeleportPaper;
+import io.papermc.lib.features.asyncteleport.AsyncTeleportPaper_13;
 import io.papermc.lib.features.bedspawnlocation.BedSpawnLocationPaper;
 import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotOptionalSnapshots;
 import io.papermc.lib.features.chunkisgenerated.ChunkIsGeneratedApiExists;
@@ -18,7 +19,7 @@ public class PaperEnvironment extends SpigotEnvironment {
 
         if (isVersion(13, 1)) {
             asyncChunksHandler = new AsyncChunksPaper_13();
-            asyncTeleportHandler = new AsyncTeleportPaper();
+            asyncTeleportHandler = new AsyncTeleportPaper_13();
         } else if (isVersion(9) && !isVersion(13)) {
             asyncChunksHandler = new AsyncChunksPaper_9_12();
             asyncTeleportHandler = new AsyncTeleportPaper();
