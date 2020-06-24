@@ -1,4 +1,12 @@
 # PaperLib Changelog
+
+## 1.0.4 - June 23, 2020
+ * Make Paper 1.13+ use Entity.teleportAsync for 1.15.2+ Optimization
+
+## 1.0.3 - May 11, 2020
+ * Added Urgent Chunks API
+ * Added Async Bed Spawn API
+
 ## 1.0.2 - Feb 2, 2019
  * Add TeleportCause to teleport API
  * Fix version detection (Different than last time)
