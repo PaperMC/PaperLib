@@ -63,8 +63,8 @@ public class MyPlugin extends JavaPlugin {
         PaperLib.suggestPaper(this);
     }
     
-    public void doSomething(Entity entity, Location location) {
-        PaperLib.teleportAsync(entity, location).thenAccept(result -> {
+    public void doSomething(Player player, Location location) {
+        PaperLib.teleportAsync(player, location).thenAccept(result -> {
             if (result) {
                 player.sendMessage("Teleported!");
             } else {
