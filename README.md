@@ -26,6 +26,8 @@ public class PaperLib {
 Uses the Async Chunk Load API, and if possible, loads/generates the chunk asynchronously before teleporting.
 Will load synchronous on Spigot.
 
+On 1.15+, this has an added improvement of also loading neighbor chunks to avoid collision checks loading chunks too.
+
 ### isChunkGenerated
 ```java
 public class PaperLib {
@@ -94,7 +96,7 @@ repositories {
 Dependency:
 ```groovy
 dependencies {
-    compile "io.papermc:paperlib:1.0.4"
+    compile "io.papermc:paperlib:1.0.5"
 }
 ```
 
@@ -131,7 +133,7 @@ Dependency:
     <dependency>
         <groupId>io.papermc</groupId>
         <artifactId>paperlib</artifactId>
-        <version>1.0.4</version>
+        <version>1.0.5</version>
         <scope>compile</scope>
      </dependency>
  </dependencies>
