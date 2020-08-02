@@ -1,5 +1,8 @@
 # PaperLib Changelog
 
+## 1.0.5 - July 27, 2020
+ * Fix cross world teleporting loading chunk in wrong world for 1.9-1.12
+
 ## 1.0.4 - June 23, 2020
  * Make Paper 1.13+ use Entity.teleportAsync for 1.15.2+ Optimization
 
