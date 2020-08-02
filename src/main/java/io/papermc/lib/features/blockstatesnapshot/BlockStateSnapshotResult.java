@@ -19,6 +19,13 @@ public class BlockStateSnapshotResult {
     private final boolean isSnapshot;
     private final BlockState state;
 
+    /**
+     * This creates a new {@link BlockStateSnapshotResult} with the given arguments.
+     * This constructor is normally invoked by a {@link BlockStateSnapshotHandler}.
+     * 
+     * @param isSnapshot Whether this {@link BlockState} is a snapshot or not
+     * @param state The corresponding {@link BlockState}
+     */
     public BlockStateSnapshotResult(boolean isSnapshot, @Nonnull BlockState state) {
         this.isSnapshot = isSnapshot;
         this.state = state;
