@@ -9,6 +9,7 @@ import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
@@ -180,10 +181,10 @@ public class PaperLib {
     }
 
     /**
-     * Get's a BlockState, optionally not using a snapshot
-     * @param block The block to get a State of
-     * @param useSnapshot Whether or not to use a snapshot when supported
-     * @return The BlockState
+     * This gets a {@link BlockState}, optionally not using a snapshot (if the {@link Environment} allows it)
+     * @param block The {@link Block} to get the {@link BlockState} of
+     * @param useSnapshot Whether or not to use a snapshot, if supported by the {@link Environment}
+     * @return The {@link BlockState}
      */
     @Nonnull
     public static BlockStateSnapshotResult getBlockState(@Nonnull Block block, boolean useSnapshot) {
