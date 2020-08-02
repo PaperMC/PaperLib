@@ -1,5 +1,7 @@
 package io.papermc.lib.features.blockstatesnapshot;
 
+import javax.annotation.Nonnull;
+
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 
@@ -26,6 +28,7 @@ public interface BlockStateSnapshotHandler {
      * @param useSnapshot Whether a snapshot should be taken, might default to true in certain {@link Environment Environments}
      * @return A {@link BlockStateSnapshotResult}
      */
-    BlockStateSnapshotResult getBlockState(Block block, boolean useSnapshot);
+    @Nonnull
+    BlockStateSnapshotResult getBlockState(@Nonnull Block block, boolean useSnapshot);
 
 }
