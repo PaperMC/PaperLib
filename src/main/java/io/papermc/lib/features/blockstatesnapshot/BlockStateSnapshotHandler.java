@@ -21,11 +21,11 @@ public interface BlockStateSnapshotHandler {
     
     /**
      * This takes the {@link BlockState} of a given {@link Block}, optionally as a snapshot.
-     * If the {@link Environment} forces a {@link BlockState} to be a snapshot, that argument
-     * will be ignored.
+     * The {@link Environment} may override this behaviour to always use snapshots or to always
+     * use non-snapshots.
      * 
      * @param block The {@link Block} to get the {@link BlockState} from
-     * @param useSnapshot Whether a snapshot should be taken, might default to true in certain {@link Environment Environments}
+     * @param useSnapshot Whether a snapshot should be taken, might be overridden in certain {@link Environment Environments}
      * @return A {@link BlockStateSnapshotResult}
      */
     @Nonnull
