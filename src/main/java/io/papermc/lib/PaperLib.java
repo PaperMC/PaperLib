@@ -181,9 +181,9 @@ public class PaperLib {
     }
 
     /**
-     * This gets a {@link BlockState}, optionally not using a snapshot (if the {@link Environment} allows it)
+     * This gets a {@link BlockState}, optionally not using a snapshot (if the {@link Environment} does not override that)
      * @param block The {@link Block} to get the {@link BlockState} of
-     * @param useSnapshot Whether or not to use a snapshot, if supported by the {@link Environment}
+     * @param useSnapshot Whether or not to use a snapshot, may be ignored by certain {@link Environment Environments}
      * @return The {@link BlockState}
      */
     @Nonnull
