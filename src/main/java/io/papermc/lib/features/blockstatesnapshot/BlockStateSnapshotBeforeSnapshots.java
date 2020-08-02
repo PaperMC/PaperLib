@@ -5,7 +5,7 @@ import org.bukkit.block.Block;
 /**
  * Block State Snapshots was added in 1.12, this will always be no snapshots
  */
-public class BlockStateSnapshotBeforeSnapshots implements BlockStateSnapshot {
+public class BlockStateSnapshotBeforeSnapshots implements BlockStateSnapshotHandler {
 
     @Override
     public BlockStateSnapshotResult getBlockState(Block block, boolean useSnapshot) {
