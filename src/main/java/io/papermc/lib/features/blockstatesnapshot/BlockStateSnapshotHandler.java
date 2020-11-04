@@ -11,10 +11,9 @@ import io.papermc.lib.environments.Environment;
  * A {@link BlockStateSnapshotHandler} is responsible for getting a {@link BlockState}
  * from a {@link Block}. This {@link BlockState} can be a snapshot or not, which depends
  * on the Server software that is used or the arguments that are passed.
- * <br>
+ * <p>
  * You can use {@link #getBlockState(Block, boolean)} to the actual {@link BlockStateSnapshotResult}
  * that holds the {@link BlockState} and a boolean determining whether it was a snapshot or not.
- *
  */
 @FunctionalInterface
 public interface BlockStateSnapshotHandler {

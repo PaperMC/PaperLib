@@ -12,7 +12,6 @@ import io.papermc.lib.environments.Environment;
  * Objects of this type are the result of {@link PaperLib#getBlockState(Block, boolean)}.
  * You can use a {@link BlockStateSnapshotResult} to obtain the actual {@link BlockState} but
  * also to determine whether a snapshot was taken or not.
- *
  */
 public class BlockStateSnapshotResult {
 
@@ -34,7 +33,7 @@ public class BlockStateSnapshotResult {
     /**
      * This method returns whether the corresponding {@link BlockState} is a snapshot or not.
      * A {@link BlockState} will be a snapshot if explicitly requested or if the {@link Environment}
-     * does not allow non-snapshot {@link BlockState BlockStates}.
+     * does not allow non-snapshot {@link BlockState}s.
      * 
      * @return Whether this {@link BlockState} is a snapshot
      */
@@ -46,7 +45,7 @@ public class BlockStateSnapshotResult {
      * This returns the {@link BlockState} that was taken.
      * To check if it is a snapshot, see {@link #isSnapshot()}.
      * 
-     * @return The taken {@link BlockState}
+     * @return The captured {@link BlockState}.
      */
     @Nonnull
     public BlockState getState() {
