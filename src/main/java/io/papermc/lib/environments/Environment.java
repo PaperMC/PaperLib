@@ -6,7 +6,7 @@ import io.papermc.lib.features.asyncteleport.AsyncTeleport;
 import io.papermc.lib.features.asyncteleport.AsyncTeleportSync;
 import io.papermc.lib.features.bedspawnlocation.BedSpawnLocation;
 import io.papermc.lib.features.bedspawnlocation.BedSpawnLocationSync;
-import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotHandler;
+import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshot;
 import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotBeforeSnapshots;
 import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotNoOption;
 import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotResult;
@@ -37,7 +37,7 @@ public abstract class Environment {
     protected AsyncChunks asyncChunksHandler = new AsyncChunksSync();
     protected AsyncTeleport asyncTeleportHandler = new AsyncTeleportSync();
     protected ChunkIsGenerated isGeneratedHandler = new ChunkIsGeneratedUnknown();
-    protected BlockStateSnapshotHandler blockStateSnapshotHandler;
+    protected BlockStateSnapshot blockStateSnapshotHandler;
     protected BedSpawnLocation bedSpawnLocationHandler = new BedSpawnLocationSync();
 
     public Environment() {

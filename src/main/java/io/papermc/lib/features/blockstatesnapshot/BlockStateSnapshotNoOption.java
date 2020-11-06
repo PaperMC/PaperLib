@@ -8,11 +8,11 @@ import org.bukkit.block.BlockState;
 import io.papermc.lib.environments.Environment;
 
 /**
- * This {@link BlockStateSnapshotHandler} is used when the {@link Environment} forces every
+ * This {@link BlockStateSnapshot} is used when the {@link Environment} forces every
  * {@link BlockState} to be a snaphot.
  *
  */
-public class BlockStateSnapshotNoOption implements BlockStateSnapshotHandler {
+public class BlockStateSnapshotNoOption implements BlockStateSnapshot {
 
     @Override
     @Nonnull

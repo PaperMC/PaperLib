@@ -8,7 +8,7 @@ import org.bukkit.block.BlockState;
 /**
  * {@link BlockState} Snapshots were added in 1.12, this will always be no snapshots.
  */
-public class BlockStateSnapshotBeforeSnapshots implements BlockStateSnapshotHandler {
+public class BlockStateSnapshotBeforeSnapshots implements BlockStateSnapshot {
 
     @Override
     @Nonnull

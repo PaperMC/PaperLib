@@ -20,7 +20,7 @@ public class BlockStateSnapshotResult {
 
     /**
      * This creates a new {@link BlockStateSnapshotResult} with the given arguments.
-     * This constructor is normally invoked by a {@link BlockStateSnapshotHandler}.
+     * This constructor is normally invoked by a {@link BlockStateSnapshot}.
      * 
      * @param isSnapshot Whether this {@link BlockState} is a snapshot or not
      * @param state The corresponding {@link BlockState}
