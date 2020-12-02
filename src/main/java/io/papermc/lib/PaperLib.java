@@ -241,6 +241,14 @@ public class PaperLib {
     }
 
     /**
+     * Gets the current Minecraft Pre-Release version if applicable, otherwise -1. IE: "1.14.3 Pre-Release 4" returns 4
+     * @return The Pre-Release Version if applicable, otherwise -1
+     */
+    public static int getMinecraftPreReleaseVersion() {
+        return ENVIRONMENT.getMinecraftPreReleaseVersion();
+    }
+
+    /**
      * Check if the server has access to the Spigot API
      * @return True for Spigot <em>and</em> Paper environments
      */

@@ -31,8 +31,9 @@ import java.util.regex.Pattern;
 @SuppressWarnings("WeakerAccess")
 public abstract class Environment {
 
-    private int minecraftVersion;
-    private int minecraftPatchVersion;
+    private final int minecraftVersion;
+    private final int minecraftPatchVersion;
+    private int minecraftPreReleaseVersion;
 
     protected AsyncChunks asyncChunksHandler = new AsyncChunksSync();
     protected AsyncTeleport asyncTeleportHandler = new AsyncTeleportSync();
@@ -41,10 +42,11 @@ public abstract class Environment {
     protected BedSpawnLocation bedSpawnLocationHandler = new BedSpawnLocationSync();
 
     public Environment() {
-        Pattern versionPattern = Pattern.compile("\\(MC: (\\d)\\.(\\d+)\\.?(\\d+?)?\\)");
+        Pattern versionPattern = Pattern.compile("\\(MC: (\\d)\\.(\\d+)\\.?(\\d+?)?(?: Pre-Release )?(\\d)?\\)");
         Matcher matcher = versionPattern.matcher(Bukkit.getVersion());
         int version = 0;
         int patchVersion = 0;
+        int preReleaseVersion = 0;
         if (matcher.find()) {
             MatchResult matchResult = matcher.toMatchResult();
             try {
@@ -57,9 +59,16 @@ public abstract class Environment {
                 } catch (Exception ignored) {
                 }
             }
+            if (matchResult.groupCount() >= 4) {
+                try {
+                    preReleaseVersion = Integer.parseInt(matcher.group(4));
+                } catch (Exception ignored) {
+                }
+            }
         }
         this.minecraftVersion = version;
         this.minecraftPatchVersion = patchVersion;
+        this.minecraftPreReleaseVersion = preReleaseVersion;
 
         // Common to all environments
         if (isVersion(13, 1)) {
@@ -118,6 +127,10 @@ public abstract class Environment {
 
     public int getMinecraftPatchVersion() {
         return minecraftPatchVersion;
+    }
+
+    public int getMinecraftPreReleaseVersion() {
+        return minecraftPreReleaseVersion;
     }
 
     public boolean isSpigot() {
