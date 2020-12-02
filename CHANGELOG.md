@@ -1,5 +1,9 @@
 # PaperLib Changelog
 
+## 1.0.6 - Dec 02, 2020
+ * Fix NPE on Bed Location API (#31)
+ * Fix Pre Release version detection (#33)
+
 ## 1.0.5 - July 27, 2020
  * Fix cross world teleporting loading chunk in wrong world for 1.9-1.12
 

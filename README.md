@@ -96,7 +96,7 @@ repositories {
 Dependency:
 ```groovy
 dependencies {
-    compile "io.papermc:paperlib:1.0.5"
+    compile "io.papermc:paperlib:1.0.6"
 }
 ```
 
@@ -133,7 +133,7 @@ Dependency:
     <dependency>
         <groupId>io.papermc</groupId>
         <artifactId>paperlib</artifactId>
-        <version>1.0.5</version>
+        <version>1.0.6</version>
         <scope>compile</scope>
      </dependency>
  </dependencies>
