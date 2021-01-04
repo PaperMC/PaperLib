@@ -8,9 +8,10 @@ import io.papermc.lib.features.asyncteleport.AsyncTeleportPaper_13;
 import io.papermc.lib.features.bedspawnlocation.BedSpawnLocationPaper;
 import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotOptionalSnapshots;
 import io.papermc.lib.features.chunkisgenerated.ChunkIsGeneratedApiExists;
-import io.papermc.lib.features.offlineplayers.GetOfflinePlayerCachedOption;
+import io.papermc.lib.features.offlineplayers.GetOfflinePlayerPaper;
 
 import org.bukkit.Location;
+import org.bukkit.Server;
 import org.bukkit.World;
 import org.bukkit.entity.HumanEntity;
 
@@ -41,7 +42,11 @@ public class PaperEnvironment extends SpigotEnvironment {
             } catch (NoSuchMethodException ignored) {}
         }
         if (isVersion(16, 4)) {
-            getOfflinePlayerHandler = new GetOfflinePlayerCachedOption();
+            try {
+                // Check for the new "getOfflinePlayerIfCached" method which was added in Paper API 1.16.4+
+                Server.class.getDeclaredMethod("getOfflinePlayerIfCached", String.class);
+                getOfflinePlayerHandler = new GetOfflinePlayerPaper();
+            } catch(NoSuchMethodException ignored) {}
         }
     }
 

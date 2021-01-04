@@ -14,7 +14,7 @@ import io.papermc.lib.features.chunkisgenerated.ChunkIsGenerated;
 import io.papermc.lib.features.chunkisgenerated.ChunkIsGeneratedApiExists;
 import io.papermc.lib.features.chunkisgenerated.ChunkIsGeneratedUnknown;
 import io.papermc.lib.features.offlineplayers.GetOfflinePlayer;
-import io.papermc.lib.features.offlineplayers.GetOfflinePlayerNoCacheOption;
+import io.papermc.lib.features.offlineplayers.GetOfflinePlayerSpigot;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
@@ -46,7 +46,7 @@ public abstract class Environment {
     protected ChunkIsGenerated isGeneratedHandler = new ChunkIsGeneratedUnknown();
     protected BlockStateSnapshot blockStateSnapshotHandler;
     protected BedSpawnLocation bedSpawnLocationHandler = new BedSpawnLocationSync();
-    protected GetOfflinePlayer getOfflinePlayerHandler = new GetOfflinePlayerNoCacheOption();
+    protected GetOfflinePlayer getOfflinePlayerHandler = new GetOfflinePlayerSpigot();
 
     public Environment() {
         Pattern versionPattern = Pattern.compile("\\(MC: (\\d)\\.(\\d+)\\.?(\\d+?)?(?: Pre-Release )?(\\d)?\\)");

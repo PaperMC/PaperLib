@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 
-public class GetOfflinePlayerNoCacheOption implements GetOfflinePlayer {
+public class GetOfflinePlayerSpigot implements GetOfflinePlayer {
     @Override
     @Nullable
     public OfflinePlayer getOfflinePlayer(@Nonnull String name, boolean makeWebRequest) {

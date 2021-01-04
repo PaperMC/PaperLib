@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 
-public class GetOfflinePlayerCachedOption implements GetOfflinePlayer {
+public class GetOfflinePlayerPaper implements GetOfflinePlayer {
     @Override
     @Nullable
     public OfflinePlayer getOfflinePlayer(@Nonnull String name, boolean makeWebRequest) {
