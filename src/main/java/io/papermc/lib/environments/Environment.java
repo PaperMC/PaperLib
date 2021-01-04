@@ -13,20 +13,26 @@ import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotResult;
 import io.papermc.lib.features.chunkisgenerated.ChunkIsGenerated;
 import io.papermc.lib.features.chunkisgenerated.ChunkIsGeneratedApiExists;
 import io.papermc.lib.features.chunkisgenerated.ChunkIsGeneratedUnknown;
+import io.papermc.lib.features.offlineplayers.GetOfflinePlayer;
+import io.papermc.lib.features.offlineplayers.GetOfflinePlayerNoCacheOption;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
-import javax.annotation.Nonnull;
 import java.util.concurrent.CompletableFuture;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 @SuppressWarnings("WeakerAccess")
 public abstract class Environment {
@@ -40,6 +46,7 @@ public abstract class Environment {
     protected ChunkIsGenerated isGeneratedHandler = new ChunkIsGeneratedUnknown();
     protected BlockStateSnapshot blockStateSnapshotHandler;
     protected BedSpawnLocation bedSpawnLocationHandler = new BedSpawnLocationSync();
+    protected GetOfflinePlayer getOfflinePlayerHandler = new GetOfflinePlayerNoCacheOption();
 
     public Environment() {
         Pattern versionPattern = Pattern.compile("\\(MC: (\\d)\\.(\\d+)\\.?(\\d+?)?(?: Pre-Release )?(\\d)?\\)");
@@ -111,6 +118,11 @@ public abstract class Environment {
 
     public CompletableFuture<Location> getBedSpawnLocationAsync(Player player, boolean isUrgent) {
         return bedSpawnLocationHandler.getBedSpawnLocationAsync(player, isUrgent);
+    }
+    
+    @Nullable
+    public OfflinePlayer getOfflinePlayer(@Nonnull String name, boolean makeWebRequest) {
+        return getOfflinePlayerHandler.getOfflinePlayer(name, makeWebRequest);
     }
 
     public boolean isVersion(int minor) {

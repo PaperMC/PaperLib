@@ -8,6 +8,8 @@ import io.papermc.lib.features.asyncteleport.AsyncTeleportPaper_13;
 import io.papermc.lib.features.bedspawnlocation.BedSpawnLocationPaper;
 import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotOptionalSnapshots;
 import io.papermc.lib.features.chunkisgenerated.ChunkIsGeneratedApiExists;
+import io.papermc.lib.features.offlineplayers.GetOfflinePlayerCachedOption;
+
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.HumanEntity;
@@ -37,6 +39,9 @@ public class PaperEnvironment extends SpigotEnvironment {
                 HumanEntity.class.getDeclaredMethod("getPotentialBedLocation");
                 bedSpawnLocationHandler = new BedSpawnLocationPaper();
             } catch (NoSuchMethodException ignored) {}
+        }
+        if (isVersion(16, 4)) {
+            getOfflinePlayerHandler = new GetOfflinePlayerCachedOption();
         }
     }
 
