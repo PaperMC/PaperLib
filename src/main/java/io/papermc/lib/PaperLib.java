@@ -173,7 +173,7 @@ public class PaperLib {
      * Checks if the chunk has been generated or not. Only works on Paper 1.12+ or any 1.13.1+ version
      * @param world World to check for
      * @param x X coordinate of the chunk to check
-     * @param z Z coordinate of the chunk to checl
+     * @param z Z coordinate of the chunk to check
      * @return If the chunk is generated or not
      */
     public static boolean isChunkGenerated(@Nonnull World world, int x, int z) {
