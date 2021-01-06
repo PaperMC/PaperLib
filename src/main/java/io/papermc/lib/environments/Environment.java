@@ -121,8 +121,8 @@ public abstract class Environment {
     }
     
     @Nullable
-    public OfflinePlayer getOfflinePlayer(@Nonnull String name, boolean makeWebRequest) {
-        return getOfflinePlayerHandler.getOfflinePlayer(name, makeWebRequest);
+    public OfflinePlayer getOfflinePlayerIfCached(@Nonnull String name, boolean makeWebRequest) {
+        return getOfflinePlayerHandler.getOfflinePlayerIfCached(name, makeWebRequest);
     }
 
     public boolean isVersion(int minor) {

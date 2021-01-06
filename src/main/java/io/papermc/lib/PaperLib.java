@@ -214,8 +214,8 @@ public class PaperLib {
      * @return OfflinePlayer by the given name or null if the player is not cached and no web request was made.
      */
     @Nullable
-    public static OfflinePlayer getOfflinePlayer(@Nonnull String name, boolean makeWebRequest) {
-        return ENVIRONMENT.getOfflinePlayer(name, makeWebRequest);
+    public static OfflinePlayer getOfflinePlayerIfCached(@Nonnull String name, boolean makeWebRequest) {
+        return ENVIRONMENT.getOfflinePlayerIfCached(name, makeWebRequest);
     }
 
     /**

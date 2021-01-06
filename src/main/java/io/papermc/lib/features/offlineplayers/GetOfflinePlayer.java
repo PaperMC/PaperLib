@@ -7,5 +7,5 @@ import org.bukkit.OfflinePlayer;
 
 public interface GetOfflinePlayer {
     @Nullable
-    OfflinePlayer getOfflinePlayer(@Nonnull String name, boolean makeWebRequest);
+    OfflinePlayer getOfflinePlayerIfCached(@Nonnull String name, boolean makeWebRequest);
 }
