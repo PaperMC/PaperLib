@@ -169,6 +169,12 @@ Shade & Relocate:
 </build>
 ```
 
+## Compiling
+PaperLib is compiled using Gradle:
+```
+$ gradlew build
+```
+
 ## License
 PaperLib is licensed under the [MIT license](LICENSE)
 
