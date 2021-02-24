@@ -172,7 +172,7 @@ Shade & Relocate:
 ## Compiling
 PaperLib is compiled using Gradle:
 ```
-$ gradlew build
+./gradlew build
 ```
 
 ## License
