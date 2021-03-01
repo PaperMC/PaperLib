@@ -246,7 +246,15 @@ public class PaperLib {
     public static boolean isSpigot() {
         return ENVIRONMENT.isSpigot();
     }
-
+    
+    /**
+     * Check if the server has access to the PaperSpigot API
+     * @return True for PaperSpigot environments
+     */
+    public static boolean isPaperSpigot() {
+        return ENVIRONMENT.isPaperSpigot();
+    }
+    
     /**
      * Check if the server has access to the Paper API
      * @return True for Paper environments
@@ -265,6 +273,10 @@ public class PaperLib {
      */
     public static void suggestPaper(@Nonnull Plugin plugin) {
         if (isPaper()) {
+            return;
+        }
+        
+        if (isPaperSpigot()) {
             return;
         }
         final String benefitsProperty = "paperlib.shown-benefits";
