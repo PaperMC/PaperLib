@@ -146,7 +146,7 @@ Shade & Relocate:
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-shade-plugin</artifactId>
-            <version>3.1.1</version>
+            <version>3.2.4</version>
             <configuration>
                 <dependencyReducedPomLocation>${project.build.directory}/dependency-reduced-pom.xml</dependencyReducedPomLocation>
                 <relocations>
