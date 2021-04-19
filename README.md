@@ -87,8 +87,8 @@ Repo:
 ```groovy
 repositories {
     maven {
-        name 'papermc'
-        url 'https://papermc.io/repo/repository/maven-public/'
+        name "papermc"
+        url "https://papermc.io/repo/repository/maven-public/"
     }
 }
 ```
@@ -102,18 +102,11 @@ dependencies {
 
 Shadow Jar and Relocate:
 ```groovy
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath "com.github.jengelman.gradle.plugins:shadow:6.1.0"
-    }
+plugins {
+  id "com.github.johnrengelman.shadow" version "6.1.0"
 }
-apply plugin: "com.github.johnrengelman.shadow"
 shadowJar {
-   relocate 'io.papermc.lib', '[YOUR PLUGIN PACKAGE].paperlib'
+   relocate "io.papermc.lib", "[YOUR PLUGIN PACKAGE].paperlib"
 }
 ```
 
