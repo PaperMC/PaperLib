@@ -96,7 +96,7 @@ repositories {
 Dependency:
 ```groovy
 dependencies {
-    compile "io.papermc:paperlib:1.0.6"
+    compileOnly "io.papermc:paperlib:1.0.6"
 }
 ```
 
@@ -104,11 +104,11 @@ Shadow Jar and Relocate:
 ```groovy
 buildscript {
     repositories {
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
-        classpath "com.github.jengelman.gradle.plugins:shadow:2.0.2"
+        classpath "com.github.jengelman.gradle.plugins:shadow:6.1.0"
     }
 }
 apply plugin: "com.github.johnrengelman.shadow"
