@@ -1,12 +1,15 @@
 package io.papermc.lib;
 
-import io.papermc.lib.environments.CraftBukkitEnvironment;
-import io.papermc.lib.environments.Environment;
-import io.papermc.lib.environments.PaperEnvironment;
-import io.papermc.lib.environments.SpigotEnvironment;
-import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotResult;
+import java.util.concurrent.CompletableFuture;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.bukkit.Chunk;
 import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
@@ -14,10 +17,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.plugin.Plugin;
 
-import javax.annotation.Nonnull;
-import java.util.concurrent.CompletableFuture;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import io.papermc.lib.environments.CraftBukkitEnvironment;
+import io.papermc.lib.environments.Environment;
+import io.papermc.lib.environments.PaperEnvironment;
+import io.papermc.lib.environments.SpigotEnvironment;
+import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotResult;
 
 /**
  * Utility methods that assist plugin developers accessing Paper features.
@@ -200,6 +204,18 @@ public class PaperLib {
      */
     public static CompletableFuture<Location> getBedSpawnLocationAsync(@Nonnull Player player, boolean isUrgent) {
         return ENVIRONMENT.getBedSpawnLocationAsync(player, isUrgent);
+    }
+    
+    /**
+     * Gets an OfflinePlayer by the given name. If the Player is not cached, an optional web request
+     * can be made to look up the UUID of that player. Web requests will block the current Thread though.
+     * @param name           The name of this OfflinePlayer.
+     * @param makeWebRequest Whether or not a web request for UUID lookups should be made.
+     * @return OfflinePlayer by the given name or null if the player is not cached and no web request was made.
+     */
+    @Nullable
+    public static OfflinePlayer getOfflinePlayerIfCached(@Nonnull String name, boolean makeWebRequest) {
+        return ENVIRONMENT.getOfflinePlayerIfCached(name, makeWebRequest);
     }
 
     /**
