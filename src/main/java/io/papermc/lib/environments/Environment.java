@@ -140,4 +140,8 @@ public abstract class Environment {
     public boolean isPaper() {
         return false;
     }
+
+    public boolean isCraftBukkit() {
+        return false;
+    }
 }

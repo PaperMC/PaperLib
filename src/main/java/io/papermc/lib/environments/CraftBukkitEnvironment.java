@@ -6,4 +6,9 @@ public class CraftBukkitEnvironment extends Environment {
     public String getName() {
         return "CraftBukkit";
     }
+
+    @Override
+    public boolean isCraftBukkit() {
+        return true;
+    }
 }
