@@ -96,14 +96,15 @@ repositories {
 Dependency:
 ```groovy
 dependencies {
-    compileOnly "io.papermc:paperlib:1.0.6"
+    implementation "io.papermc:paperlib:1.0.6"
 }
 ```
 
 Shadow Jar and Relocate:
 ```groovy
 plugins {
-  id "com.github.johnrengelman.shadow" version "6.1.0"
+  id "com.github.johnrengelman.shadow" version "7.0.0"
+  // Make sure to always use the latest version (https://plugins.gradle.org/plugin/com.github.johnrengelman.shadow)
 }
 shadowJar {
    relocate "io.papermc.lib", "[YOUR PLUGIN PACKAGE].paperlib"
