@@ -4,6 +4,7 @@ import io.papermc.lib.environments.CraftBukkitEnvironment;
 import io.papermc.lib.environments.Environment;
 import io.papermc.lib.environments.PaperEnvironment;
 import io.papermc.lib.environments.SpigotEnvironment;
+import io.papermc.lib.features.PaperFeature;
 import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotResult;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -270,10 +271,10 @@ public class PaperLib {
      * If you do not mind helping spread Paper, please call this in your plugin onEnable to help spread
      * awareness about Paper, and encourage them that your plugin is better when used with Paper!
      *
-     * This passes the default logLevel of Level.INFO
+     * This passes the default logLevel of Level.INFO and all the features as a default
      *
      * @param plugin Your plugin object
-     * @see #suggestPaper(Plugin, Level) 
+     * @see #suggestPaper(Plugin, Level)
      */
     public static void suggestPaper(@Nonnull Plugin plugin) {
         suggestPaper(plugin, Level.INFO);
@@ -285,10 +286,40 @@ public class PaperLib {
      * If you do not mind helping spread Paper, please call this in your plugin onEnable to help spread
      * awareness about Paper, and encourage them that your plugin is better when used with Paper!
      *
-     * @param plugin Your plugin object
+     * This passes the default logLevel of Level.INFO
+     *
+     * @param plugin        Your plugin object
+     * @param paperFeatures The features your plugin is using
+     * @see #suggestPaper(Plugin, Level)
+     */
+    public static void suggestPaper(@Nonnull Plugin plugin, @Nonnull PaperFeature... paperFeatures) {
+        suggestPaper(plugin, Level.INFO, paperFeatures);
+    }
+
+    /**
+     * Can be called during plugin initialization to inform the server owner they should switch to Paper
+     *
+     * If you do not mind helping spread Paper, please call this in your plugin onEnable to help spread
+     * awareness about Paper, and encourage them that your plugin is better when used with Paper!
+     *
+     * @param plugin   Your plugin object
      * @param logLevel The logLevel you want to choose
      */
     public static void suggestPaper(@Nonnull Plugin plugin, @Nonnull Level logLevel) {
+        suggestPaper(plugin, logLevel, PaperFeature.values());
+    }
+
+    /**
+     * Can be called during plugin initialization to inform the server owner they should switch to Paper
+     *
+     * If you do not mind helping spread Paper, please call this in your plugin onEnable to help spread
+     * awareness about Paper, and encourage them that your plugin is better when used with Paper!
+     *
+     * @param plugin        Your plugin object
+     * @param logLevel      The logLevel you want to choose
+     * @param paperFeatures The features your plugin is using
+     */
+    public static void suggestPaper(@Nonnull Plugin plugin, @Nonnull Level logLevel, @Nonnull PaperFeature... paperFeatures) {
         if (isPaper()) {
             return;
         }
@@ -301,17 +332,10 @@ public class PaperLib {
         if (System.getProperty(benefitsProperty) == null) {
             System.setProperty(benefitsProperty, "1");
             logger.log(logLevel, "  ");
-            logger.log(logLevel, " Paper offers significant performance improvements,");
-            logger.log(logLevel, " bug fixes, security enhancements and optional");
-            logger.log(logLevel, " features for server owners to enhance their server.");
+            for (PaperFeature paperFeature : paperFeatures) {
+                logger.log(logLevel, " * " + paperFeature.getFeature());
+            }
             logger.log(logLevel, "  ");
-            logger.log(logLevel, " Paper includes Timings v2, which is significantly");
-            logger.log(logLevel, " better at diagnosing lag problems over v1.");
-            logger.log(logLevel, "  ");
-            logger.log(logLevel, " All of your plugins should still work, and the");
-            logger.log(logLevel, " Paper community will gladly help you fix any issues.");
-            logger.log(logLevel, "  ");
-            logger.log(logLevel, " Join the Paper Community @ https://papermc.io");
         }
         logger.log(logLevel, "====================================================");
     }
