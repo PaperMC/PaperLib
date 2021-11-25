@@ -9,7 +9,7 @@ val jar by tasks.existing
 group = "io.papermc"
 version = "1.0.7-SNAPSHOT"
 
-val mcVersion = "1.16.5-R0.1-SNAPSHOT"
+val mcVersion = "1.17.1-R0.1-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -18,28 +18,26 @@ repositories {
 }
 
 dependencies {
-    compileOnly("com.google.code.findbugs:jsr305:1.3.9")
-    compileOnly("com.destroystokyo.paper:paper-api:$mcVersion")
+    compileOnly("com.google.code.findbugs:jsr305:3.0.2")
+    compileOnly("io.papermc.paper:paper-api:$mcVersion")
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-}
-
-val sourcesJar by tasks.registering(Jar::class) {
-    classifier = "sources"
-    from(sourceSets["main"].allSource)
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
+    withSourcesJar()
+    withJavadocJar()
+    disableAutoTargetJvm()
 }
 
 javadoc {
     isFailOnError = false
 }
 
-val javadocJar by tasks.registering(Jar::class) {
-    dependsOn(javadoc)
-    classifier = "javadoc"
-    from(javadoc)
+tasks.compileJava {
+    options.encoding = Charsets.UTF_8.name()
+    options.release.set(8)
 }
 
 // A couple aliases just to simplify task names
@@ -55,17 +53,10 @@ tasks.register("deploy") {
     dependsOn(tasks.named("publish"))
 }
 
-artifacts {
-    add("archives", sourcesJar)
-    add("archives", javadocJar)
-}
-
 publishing {
     publications {
         register<MavenPublication>("mavenJava") {
             from(components["java"])
-            artifact(sourcesJar.get())
-            artifact(javadocJar.get())
 
             pom {
                 name.set("PaperLib")
