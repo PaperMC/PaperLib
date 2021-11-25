@@ -33,7 +33,7 @@ public abstract class Environment {
 
     private final int minecraftVersion;
     private final int minecraftPatchVersion;
-    private int minecraftPreReleaseVersion;
+    private final int minecraftPreReleaseVersion;
 
     protected AsyncChunks asyncChunksHandler = new AsyncChunksSync();
     protected AsyncTeleport asyncTeleportHandler = new AsyncTeleportSync();
@@ -42,7 +42,7 @@ public abstract class Environment {
     protected BedSpawnLocation bedSpawnLocationHandler = new BedSpawnLocationSync();
 
     public Environment() {
-        Pattern versionPattern = Pattern.compile("\\(MC: (\\d)\\.(\\d+)\\.?(\\d+?)?(?: Pre-Release )?(\\d)?\\)");
+        Pattern versionPattern = Pattern.compile("(?i)\\(MC: (\\d)\\.(\\d+)\\.?(\\d+?)?(?: Pre-Release )?(\\d)?\\)");
         Matcher matcher = versionPattern.matcher(Bukkit.getVersion());
         int version = 0;
         int patchVersion = 0;
