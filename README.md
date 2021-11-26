@@ -96,14 +96,14 @@ repositories {
 Dependency:
 ```groovy
 dependencies {
-    implementation "io.papermc:paperlib:1.0.6"
+    implementation "io.papermc:paperlib:1.0.7"
 }
 ```
 
-Shadow Jar and Relocate:
+Shadow Jar and Relocate (Groovy Syntax):
 ```groovy
 plugins {
-  id "com.github.johnrengelman.shadow" version "7.0.0"
+  id "com.github.johnrengelman.shadow" version "7.1.0"
   // Make sure to always use the latest version (https://plugins.gradle.org/plugin/com.github.johnrengelman.shadow)
 }
 shadowJar {
@@ -127,7 +127,7 @@ Dependency:
     <dependency>
         <groupId>io.papermc</groupId>
         <artifactId>paperlib</artifactId>
-        <version>1.0.6</version>
+        <version>1.0.7</version>
         <scope>compile</scope>
      </dependency>
  </dependencies>
@@ -163,6 +163,11 @@ Shade & Relocate:
 </build>
 ```
 
+## Compiling
+PaperLib is compiled using Gradle:
+```
+./gradlew build
+```
+
 ## License
 PaperLib is licensed under the [MIT license](LICENSE)
-
