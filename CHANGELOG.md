@@ -1,5 +1,9 @@
 # PaperLib Changelog
 
+## 1.0.7 - Nov 25, 2021
+ * Make environment regex case-insensitive, to fix detection for 1.18 pre-release versions
+ * Update Gradle and compile against 1.17.1
+
 ## 1.0.6 - Dec 02, 2020
  * Fix NPE on Bed Location API (#31)
  * Fix Pre Release version detection (#33)
