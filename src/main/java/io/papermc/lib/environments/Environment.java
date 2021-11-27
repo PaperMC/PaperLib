@@ -13,6 +13,7 @@ import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotResult;
 import io.papermc.lib.features.chunkisgenerated.ChunkIsGenerated;
 import io.papermc.lib.features.chunkisgenerated.ChunkIsGeneratedApiExists;
 import io.papermc.lib.features.chunkisgenerated.ChunkIsGeneratedUnknown;
+import java.util.Locale;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -22,7 +23,6 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
-import javax.annotation.Nonnull;
 import java.util.concurrent.CompletableFuture;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
@@ -34,6 +34,7 @@ public abstract class Environment {
     private final int minecraftVersion;
     private final int minecraftPatchVersion;
     private final int minecraftPreReleaseVersion;
+    private final int minecraftReleaseCandidateVersion;
 
     protected AsyncChunks asyncChunksHandler = new AsyncChunksSync();
     protected AsyncTeleport asyncTeleportHandler = new AsyncTeleportSync();
@@ -42,11 +43,16 @@ public abstract class Environment {
     protected BedSpawnLocation bedSpawnLocationHandler = new BedSpawnLocationSync();
 
     public Environment() {
-        Pattern versionPattern = Pattern.compile("(?i)\\(MC: (\\d)\\.(\\d+)\\.?(\\d+?)?(?: Pre-Release )?(\\d)?\\)");
-        Matcher matcher = versionPattern.matcher(Bukkit.getVersion());
+        this(Bukkit.getVersion());
+    }
+
+    Environment(final String bukkitVersion) {
+        Pattern versionPattern = Pattern.compile("(?i)\\(MC: (\\d)\\.(\\d+)\\.?(\\d+?)?(?: (Pre-Release|Release Candidate) )?(\\d)?\\)");
+        Matcher matcher = versionPattern.matcher(bukkitVersion);
         int version = 0;
         int patchVersion = 0;
-        int preReleaseVersion = 0;
+        int preReleaseVersion = -1;
+        int releaseCandidateVersion = -1;
         if (matcher.find()) {
             MatchResult matchResult = matcher.toMatchResult();
             try {
@@ -59,9 +65,14 @@ public abstract class Environment {
                 } catch (Exception ignored) {
                 }
             }
-            if (matchResult.groupCount() >= 4) {
+            if (matchResult.groupCount() >= 5) {
                 try {
-                    preReleaseVersion = Integer.parseInt(matcher.group(4));
+                    final int ver = Integer.parseInt(matcher.group(5));
+                    if (matcher.group(4).toLowerCase(Locale.ENGLISH).contains("pre")) {
+                        preReleaseVersion = ver;
+                    } else {
+                        releaseCandidateVersion = ver;
+                    }
                 } catch (Exception ignored) {
                 }
             }
@@ -69,6 +80,7 @@ public abstract class Environment {
         this.minecraftVersion = version;
         this.minecraftPatchVersion = patchVersion;
         this.minecraftPreReleaseVersion = preReleaseVersion;
+        this.minecraftReleaseCandidateVersion = releaseCandidateVersion;
 
         // Common to all environments
         if (isVersion(13, 1)) {
@@ -131,6 +143,10 @@ public abstract class Environment {
 
     public int getMinecraftPreReleaseVersion() {
         return minecraftPreReleaseVersion;
+    }
+
+    public int getMinecraftReleaseCandidateVersion() {
+        return minecraftReleaseCandidateVersion;
     }
 
     public boolean isSpigot() {
