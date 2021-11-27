@@ -17,9 +17,20 @@ repositories {
     maven("https://oss.sonatype.org/content/groups/public/")
 }
 
+val compileAndTest: Configuration by configurations.creating
+configurations.compileOnly {
+    extendsFrom(compileAndTest)
+}
+configurations.testImplementation {
+    extendsFrom(compileAndTest)
+}
+
 dependencies {
     compileOnly("com.google.code.findbugs:jsr305:3.0.2")
-    compileOnly("io.papermc.paper:paper-api:$mcVersion")
+    compileAndTest("io.papermc.paper:paper-api:$mcVersion")
+
+    testImplementation("org.junit.jupiter", "junit-jupiter-api", "5.8.1")
+    testRuntimeOnly("org.junit.jupiter", "junit-jupiter-engine")
 }
 
 java {
@@ -51,6 +62,14 @@ tasks.register("deploy") {
     group = "publishing"
     description = "Alias for publish"
     dependsOn(tasks.named("publish"))
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
+
+tasks.compileTestJava {
+    options.release.set(17) // Use new APIs for tests
 }
 
 publishing {

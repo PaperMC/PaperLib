@@ -249,6 +249,14 @@ public class PaperLib {
     }
 
     /**
+     * Gets the current Minecraft Release Candidate version if applicable, otherwise -1. IE: "1.18 Release Candidate 3" returns 3
+     * @return The Release Candidate Version if applicable, otherwise -1
+     */
+    public static int getMinecraftReleaseCandidateVersion() {
+        return ENVIRONMENT.getMinecraftReleaseCandidateVersion();
+    }
+
+    /**
      * Check if the server has access to the Spigot API
      * @return True for Spigot <em>and</em> Paper environments
      */
