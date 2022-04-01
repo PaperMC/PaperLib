@@ -10,7 +10,12 @@ import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotOptionalSnap
 import io.papermc.lib.features.chunkisgenerated.ChunkIsGeneratedApiExists;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Map;
 
 public class PaperEnvironment extends SpigotEnvironment {
 
@@ -37,6 +42,15 @@ public class PaperEnvironment extends SpigotEnvironment {
                 HumanEntity.class.getDeclaredMethod("getPotentialBedLocation");
                 bedSpawnLocationHandler = new BedSpawnLocationPaper();
             } catch (NoSuchMethodException ignored) {}
+        }
+    }
+
+    @Override
+    public void sendMultiBlockChange(Player player, @NotNull Map<Location, BlockData> blockChanges, boolean suppressLightUpdates) {
+        if(!isVersion(18)){
+            super.sendMultiBlockChange(player, blockChanges, suppressLightUpdates);
+        } else {
+            player.sendMultiBlockChange(blockChanges, suppressLightUpdates);
         }
     }
 

@@ -48,6 +48,17 @@ Allows you to optionally avoid taking a snapshot of a TileEntity in a BlockState
 false for the snapshot. In versions 1.12+ on Spigot, the snapshot will always be true. In Paper 1.12+, the snapshot will
 be whether or not you requested one in the API call.
 
+### sendMultiBlockChange
+```java
+public class PaperLib {
+  public static sendMultiBlockChange(Player player, @NotNull Map<Location, BlockData> blockChanges);
+  public static sendMultiBlockChange(Player player, @NotNull Map<Location, BlockData> blockChanges, boolean suppressLightUpdates);
+}
+```
+
+Allows you to use the optimized chunk section update method for bulk block changes.
+Falls back to Player#sendBlockChange when running Spigot or Paper < 1.18 
+
 ### suggestPaper
 ```java
 public class PaperLib {

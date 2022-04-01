@@ -19,10 +19,13 @@ import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
@@ -123,6 +126,13 @@ public abstract class Environment {
 
     public CompletableFuture<Location> getBedSpawnLocationAsync(Player player, boolean isUrgent) {
         return bedSpawnLocationHandler.getBedSpawnLocationAsync(player, isUrgent);
+    }
+
+    public void sendMultiBlockChange(Player player, @NotNull Map<Location, BlockData> blockChanges) {
+        sendMultiBlockChange(player, blockChanges, false);
+    }
+    public void sendMultiBlockChange(Player player, @NotNull Map<Location, BlockData> blockChanges, boolean suppressLightUpdates) {
+        blockChanges.forEach(player::sendBlockChange);
     }
 
     public boolean isVersion(int minor) {
