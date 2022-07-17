@@ -21,7 +21,7 @@ public class AsyncTeleportPaper implements AsyncTeleport {
         Location location = entity2.getLocation();
         int x = location.getBlockX() >> 4;
         int z = location.getBlockZ() >> 4;
-        return PaperLib.getChunkAtAsyncUrgently(location.getWorld(), x, z, true).thenApply(chunk -> entity.teleport(location, cause));
+        return this.teleportAsync(entity, entity2.getLocation(), cause);
     }
 
 }
