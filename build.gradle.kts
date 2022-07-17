@@ -1,6 +1,7 @@
 plugins {
     java
     `maven-publish`
+    id("com.github.spotbugs") version "5.0.9"
 }
 
 val javadoc by tasks.existing(Javadoc::class)
@@ -26,7 +27,6 @@ configurations.testImplementation {
 }
 
 dependencies {
-    compileOnly("com.google.code.findbugs:jsr305:3.0.2")
     compileAndTest("io.papermc.paper:paper-api:$mcVersion")
 
     testImplementation("org.junit.jupiter", "junit-jupiter-api", "5.8.1")
