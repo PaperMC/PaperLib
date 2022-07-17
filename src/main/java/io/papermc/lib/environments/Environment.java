@@ -85,9 +85,9 @@ public abstract class Environment {
         // Common to all environments
         if (isVersion(13, 1)) {
             isGeneratedHandler = new ChunkIsGeneratedApiExists();
-        } else {
+        } /*else {
             // TODO: Reflection based?
-        }
+        }*/
         if (!isVersion(12)) {
             blockStateSnapshotHandler = new BlockStateSnapshotBeforeSnapshots();
         } else {
@@ -111,6 +111,10 @@ public abstract class Environment {
 
     public CompletableFuture<Boolean> teleport(Entity entity, Location location, TeleportCause cause) {
         return asyncTeleportHandler.teleportAsync(entity, location, cause);
+    }
+
+    public CompletableFuture<Boolean> teleportEntity(Entity entity, Entity entity2, TeleportCause cause) {
+        return asyncTeleportHandler.teleportAsync(entity, entity2, cause);
     }
 
     public boolean isChunkGenerated(World world, int x, int z) {

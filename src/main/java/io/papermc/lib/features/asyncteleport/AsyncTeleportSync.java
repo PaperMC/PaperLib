@@ -13,4 +13,9 @@ public class AsyncTeleportSync implements AsyncTeleport {
         return CompletableFuture.completedFuture(entity.teleport(location, cause));
     }
 
+    @Override
+    public CompletableFuture<Boolean> teleportAsync(Entity entity, Entity entity2, TeleportCause cause) {
+        return CompletableFuture.completedFuture(entity.teleport(entity2.getLocation(), cause));
+    }
+
 }

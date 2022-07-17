@@ -8,4 +8,6 @@ import java.util.concurrent.CompletableFuture;
 
 public interface AsyncTeleport {
     CompletableFuture<Boolean> teleportAsync(Entity entity, Location location, TeleportCause cause);
+
+    CompletableFuture<Boolean> teleportAsync(Entity entity, Entity entity2, TeleportCause cause);
 }
