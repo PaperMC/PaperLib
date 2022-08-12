@@ -33,16 +33,21 @@ public class PaperLib {
     private static Environment ENVIRONMENT = initialize();
 
     private static Environment initialize() {
-        try {
-            Class.forName("com.destroystokyo.paper.PaperConfig");
+        if (hasClass("com.destroystokyo.paper.PaperConfig") || hasClass("io.papermc.paper.configuration.Configuration")) {
             return new PaperEnvironment();
+        } else if (hasClass("org.spigotmc.SpigotConfig")) {
+            return new SpigotEnvironment();
+        } else {
+            return new CraftBukkitEnvironment();
+        }
+    }
+
+    private static boolean hasClass(String className) {
+        try {
+            Class.forName(className);
+            return true;
         } catch (ClassNotFoundException e) {
-            try {
-                Class.forName("org.spigotmc.SpigotConfig");
-                return new SpigotEnvironment();
-            } catch (ClassNotFoundException e1) {
-                return new CraftBukkitEnvironment();
-            }
+            return false;
         }
     }
 
