@@ -261,6 +261,30 @@ public class PaperLib {
         return ENVIRONMENT.getMinecraftReleaseCandidateVersion();
     }
 
+    public static boolean openPlayerAnvil(Player player) {
+        return ENVIRONMENT.openAnvil(player);
+    }
+
+    public static boolean openPlayerGrindstone(Player player) {
+        return ENVIRONMENT.openGrindstone(player);
+    }
+
+    public static boolean openPlayerLoom(Player player) {
+        return ENVIRONMENT.openLoom(player);
+    }
+
+    public static boolean openPlayerCartographyTable(Player player) {
+        return ENVIRONMENT.openCartographyTable(player);
+    }
+
+    public static boolean openPlayerStonecutter(Player player) {
+        return ENVIRONMENT.openStonecutter(player);
+    }
+
+    public static boolean openPlayerSmithingTable(Player player) {
+        return ENVIRONMENT.openSmithingTable(player);
+    }
+
     /**
      * Check if the server has access to the Spigot API
      * @return True for Spigot <em>and</em> Paper environments
@@ -286,7 +310,7 @@ public class PaperLib {
      * This passes the default logLevel of Level.INFO
      *
      * @param plugin Your plugin object
-     * @see #suggestPaper(Plugin, Level) 
+     * @see #suggestPaper(Plugin, Level)
      */
     public static void suggestPaper(@Nonnull Plugin plugin) {
         suggestPaper(plugin, Level.INFO);

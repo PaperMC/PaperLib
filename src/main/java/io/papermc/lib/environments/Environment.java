@@ -14,6 +14,19 @@ import io.papermc.lib.features.chunkisgenerated.ChunkIsGenerated;
 import io.papermc.lib.features.chunkisgenerated.ChunkIsGeneratedApiExists;
 import io.papermc.lib.features.chunkisgenerated.ChunkIsGeneratedUnknown;
 import java.util.Locale;
+
+import io.papermc.lib.features.inventory.anvil.Anvil;
+import io.papermc.lib.features.inventory.anvil.AnvilPaper;
+import io.papermc.lib.features.inventory.cartographytable.CartographyTable;
+import io.papermc.lib.features.inventory.cartographytable.CartographyTablePaper;
+import io.papermc.lib.features.inventory.grindstone.Grindstone;
+import io.papermc.lib.features.inventory.grindstone.GrindstonePaper;
+import io.papermc.lib.features.inventory.loom.Loom;
+import io.papermc.lib.features.inventory.loom.LoomPaper;
+import io.papermc.lib.features.inventory.smithingtable.SmithingTable;
+import io.papermc.lib.features.inventory.smithingtable.SmithingTablePaper;
+import io.papermc.lib.features.inventory.stonecutter.Stonecutter;
+import io.papermc.lib.features.inventory.stonecutter.StonecutterPaper;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -41,6 +54,12 @@ public abstract class Environment {
     protected ChunkIsGenerated isGeneratedHandler = new ChunkIsGeneratedUnknown();
     protected BlockStateSnapshot blockStateSnapshotHandler;
     protected BedSpawnLocation bedSpawnLocationHandler = new BedSpawnLocationSync();
+    protected Anvil anvilHandler = new AnvilPaper();
+    protected Grindstone grindstoneHandler = new GrindstonePaper();
+    protected CartographyTable cartographyTableHandler = new CartographyTablePaper();
+    protected Loom loomHandler = new LoomPaper();
+    protected SmithingTable smithingTableHandler = new SmithingTablePaper();
+    protected Stonecutter stonecutterHandler = new StonecutterPaper();
 
     public Environment() {
         this(Bukkit.getVersion());
@@ -123,6 +142,30 @@ public abstract class Environment {
 
     public CompletableFuture<Location> getBedSpawnLocationAsync(Player player, boolean isUrgent) {
         return bedSpawnLocationHandler.getBedSpawnLocationAsync(player, isUrgent);
+    }
+
+    public boolean openAnvil(Player player) {
+        return anvilHandler.openAnvil(player);
+    }
+
+    public boolean openGrindstone(Player player) {
+        return grindstoneHandler.openGrindstone(player);
+    }
+
+    public boolean openCartographyTable(Player player) {
+        return cartographyTableHandler.openCartographyTable(player);
+    }
+
+    public boolean openLoom(Player player) {
+        return loomHandler.openLoom(player);
+    }
+
+    public boolean openSmithingTable(Player player) {
+        return smithingTableHandler.openSmithingTable(player);
+    }
+
+    public boolean openStonecutter(Player player) {
+        return stonecutterHandler.openStonecutter(player);
     }
 
     public boolean isVersion(int minor) {
