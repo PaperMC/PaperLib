@@ -5,6 +5,7 @@ import io.papermc.lib.environments.Environment;
 import io.papermc.lib.environments.PaperEnvironment;
 import io.papermc.lib.environments.SpigotEnvironment;
 import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotResult;
+import io.papermc.lib.features.inventoryholdersnapshot.InventoryHolderSnapshotResult;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -12,6 +13,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.Plugin;
 
 import javax.annotation.Nonnull;
@@ -194,6 +196,18 @@ public class PaperLib {
     @Nonnull
     public static BlockStateSnapshotResult getBlockState(@Nonnull Block block, boolean useSnapshot) {
         return ENVIRONMENT.getBlockState(block, useSnapshot);
+    }
+
+    /**
+     * Gets an InventoryHolder, optionally not using a snapshot
+     *
+     * @param inventory The inventory to get the holder of
+     * @param useSnapshot Whether to use a snapshot when supported
+     * @return The InventoryHolder
+     */
+    @Nonnull
+    public static InventoryHolderSnapshotResult getHolder(@Nonnull Inventory inventory, boolean useSnapshot) {
+        return ENVIRONMENT.getHolder(inventory, useSnapshot);
     }
 
     /**

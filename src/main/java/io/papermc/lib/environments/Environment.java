@@ -14,6 +14,11 @@ import io.papermc.lib.features.chunkisgenerated.ChunkIsGenerated;
 import io.papermc.lib.features.chunkisgenerated.ChunkIsGeneratedApiExists;
 import io.papermc.lib.features.chunkisgenerated.ChunkIsGeneratedUnknown;
 import java.util.Locale;
+
+import io.papermc.lib.features.inventoryholdersnapshot.InventoryHolderSnapshot;
+import io.papermc.lib.features.inventoryholdersnapshot.InventoryHolderSnapshotBeforeSnapshots;
+import io.papermc.lib.features.inventoryholdersnapshot.InventoryHolderSnapshotNoOption;
+import io.papermc.lib.features.inventoryholdersnapshot.InventoryHolderSnapshotResult;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -22,6 +27,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
+import org.bukkit.inventory.Inventory;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.regex.MatchResult;
@@ -40,6 +46,7 @@ public abstract class Environment {
     protected AsyncTeleport asyncTeleportHandler = new AsyncTeleportSync();
     protected ChunkIsGenerated isGeneratedHandler = new ChunkIsGeneratedUnknown();
     protected BlockStateSnapshot blockStateSnapshotHandler;
+    protected InventoryHolderSnapshot inventoryHolderSnapshotHandler;
     protected BedSpawnLocation bedSpawnLocationHandler = new BedSpawnLocationSync();
 
     public Environment() {
@@ -90,8 +97,10 @@ public abstract class Environment {
         }
         if (!isVersion(12)) {
             blockStateSnapshotHandler = new BlockStateSnapshotBeforeSnapshots();
+            inventoryHolderSnapshotHandler = new InventoryHolderSnapshotBeforeSnapshots();
         } else {
             blockStateSnapshotHandler = new BlockStateSnapshotNoOption();
+            inventoryHolderSnapshotHandler = new InventoryHolderSnapshotNoOption();
         }
     }
 
@@ -119,6 +128,10 @@ public abstract class Environment {
 
     public BlockStateSnapshotResult getBlockState(Block block, boolean useSnapshot) {
         return blockStateSnapshotHandler.getBlockState(block, useSnapshot);
+    }
+
+    public InventoryHolderSnapshotResult getHolder(Inventory inventory, boolean useSnapshot) {
+        return inventoryHolderSnapshotHandler.getHolder(inventory, useSnapshot);
     }
 
     public CompletableFuture<Location> getBedSpawnLocationAsync(Player player, boolean isUrgent) {
