@@ -1,5 +1,9 @@
 # PaperLib Changelog
 
+## 1.0.8 - Dec 31, 2022
+ * Improved version detection for RCs and future versions of paper
+ * Add support for obtaining an InventoryHolder without a snapshot
+
 ## 1.0.7 - Nov 25, 2021
  * Make environment regex case-insensitive, to fix detection for 1.18 pre-release versions
  * Update Gradle and compile against 1.17.1
