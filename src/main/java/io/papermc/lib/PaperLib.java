@@ -1,11 +1,11 @@
 package io.papermc.lib;
 
-import io.papermc.lib.environments.CraftBukkitEnvironment;
-import io.papermc.lib.environments.Environment;
-import io.papermc.lib.environments.PaperEnvironment;
-import io.papermc.lib.environments.SpigotEnvironment;
+import io.papermc.lib.environments.*;
 import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotResult;
 import io.papermc.lib.features.inventoryholdersnapshot.InventoryHolderSnapshotResult;
+import io.papermc.lib.scheduler.SchedulerAdapter;
+import io.papermc.lib.scheduler.adapters.BukkitSchedulerAdapter;
+import io.papermc.lib.scheduler.adapters.FoliaSchedulerAdapter;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -15,6 +15,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.Plugin;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import java.util.concurrent.CompletableFuture;
@@ -35,7 +37,9 @@ public class PaperLib {
     private static Environment ENVIRONMENT = initialize();
 
     private static Environment initialize() {
-        if (hasClass("com.destroystokyo.paper.PaperConfig") || hasClass("io.papermc.paper.configuration.Configuration")) {
+        if (hasClass("io.papermc.paper.threadedregions.RegionizedServer")) {
+            return new FoliaEnvironment();
+        } else if (hasClass("com.destroystokyo.paper.PaperConfig") || hasClass("io.papermc.paper.configuration.Configuration")) {
             return new PaperEnvironment();
         } else if (hasClass("org.spigotmc.SpigotConfig")) {
             return new SpigotEnvironment();
@@ -222,6 +226,16 @@ public class PaperLib {
     }
 
     /**
+     * Creates a platform-specific task scheduler for the specified plugin
+     *
+     * @param plugin the specified plugin
+     * @return platform-specific task scheduler
+     */
+    public static @NotNull SchedulerAdapter createSchedulerAdapter(@NonNull Plugin plugin) {
+        return ENVIRONMENT.isFolia() ? new FoliaSchedulerAdapter(plugin) : new BukkitSchedulerAdapter(plugin);
+    }
+
+    /**
      * Detects if the current MC version is at least the following version.
      *
      * Assumes 0 patch version.
@@ -289,6 +303,14 @@ public class PaperLib {
      */
     public static boolean isPaper() {
         return ENVIRONMENT.isPaper();
+    }
+
+    /**
+     * Check if the server has access to the Folia API
+     * @return True for Paper Folia
+     */
+    public static boolean isFolia() {
+        return ENVIRONMENT.isFolia();
     }
 
     /**

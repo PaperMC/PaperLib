@@ -9,7 +9,7 @@ val jar by tasks.existing
 group = "io.papermc"
 version = "1.0.9-SNAPSHOT"
 
-val mcVersion = "1.17.1-R0.1-SNAPSHOT"
+val mcVersion = "1.19.4-R0.1-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -27,7 +27,7 @@ configurations.testImplementation {
 
 dependencies {
     compileOnly("com.google.code.findbugs:jsr305:3.0.2")
-    compileAndTest("io.papermc.paper:paper-api:$mcVersion")
+    compileAndTest("dev.folia:folia-api:$mcVersion")
 
     testImplementation("org.junit.jupiter", "junit-jupiter-api", "5.8.1")
     testRuntimeOnly("org.junit.jupiter", "junit-jupiter-engine")
