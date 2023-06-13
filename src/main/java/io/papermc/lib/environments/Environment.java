@@ -19,6 +19,7 @@ import io.papermc.lib.features.inventoryholdersnapshot.InventoryHolderSnapshot;
 import io.papermc.lib.features.inventoryholdersnapshot.InventoryHolderSnapshotBeforeSnapshots;
 import io.papermc.lib.features.inventoryholdersnapshot.InventoryHolderSnapshotNoOption;
 import io.papermc.lib.features.inventoryholdersnapshot.InventoryHolderSnapshotResult;
+import io.papermc.lib.scheduler.SchedulerAdapter;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -28,6 +29,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.plugin.Plugin;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.regex.MatchResult;
@@ -136,6 +138,10 @@ public abstract class Environment {
 
     public CompletableFuture<Location> getBedSpawnLocationAsync(Player player, boolean isUrgent) {
         return bedSpawnLocationHandler.getBedSpawnLocationAsync(player, isUrgent);
+    }
+
+    public SchedulerAdapter createSchedulerAdapter(Plugin plugin) {
+        return null;
     }
 
     public boolean isVersion(int minor) {

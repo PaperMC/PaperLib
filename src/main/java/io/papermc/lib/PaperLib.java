@@ -4,8 +4,6 @@ import io.papermc.lib.environments.*;
 import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotResult;
 import io.papermc.lib.features.inventoryholdersnapshot.InventoryHolderSnapshotResult;
 import io.papermc.lib.scheduler.SchedulerAdapter;
-import io.papermc.lib.scheduler.adapters.BukkitSchedulerAdapter;
-import io.papermc.lib.scheduler.adapters.FoliaSchedulerAdapter;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -232,7 +230,7 @@ public class PaperLib {
      * @return platform-specific task scheduler
      */
     public static @NotNull SchedulerAdapter createSchedulerAdapter(@NonNull Plugin plugin) {
-        return ENVIRONMENT.isFolia() ? new FoliaSchedulerAdapter(plugin) : new BukkitSchedulerAdapter(plugin);
+        return ENVIRONMENT.createSchedulerAdapter(plugin);
     }
 
     /**

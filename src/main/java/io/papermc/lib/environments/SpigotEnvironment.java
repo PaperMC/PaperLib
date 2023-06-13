@@ -1,5 +1,9 @@
 package io.papermc.lib.environments;
 
+import io.papermc.lib.scheduler.SchedulerAdapter;
+import io.papermc.lib.scheduler.adapters.BukkitSchedulerAdapter;
+import org.bukkit.plugin.Plugin;
+
 public class SpigotEnvironment extends CraftBukkitEnvironment {
 
     public SpigotEnvironment() {
@@ -16,4 +20,8 @@ public class SpigotEnvironment extends CraftBukkitEnvironment {
         return true;
     }
 
+    @Override
+    public SchedulerAdapter createSchedulerAdapter(Plugin plugin) {
+        return new BukkitSchedulerAdapter(plugin);
+    }
 }
