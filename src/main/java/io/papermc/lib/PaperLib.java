@@ -1,11 +1,9 @@
 package io.papermc.lib;
 
-import io.papermc.lib.environments.CraftBukkitEnvironment;
-import io.papermc.lib.environments.Environment;
-import io.papermc.lib.environments.PaperEnvironment;
-import io.papermc.lib.environments.SpigotEnvironment;
+import io.papermc.lib.environments.*;
 import io.papermc.lib.features.blockstatesnapshot.BlockStateSnapshotResult;
 import io.papermc.lib.features.inventoryholdersnapshot.InventoryHolderSnapshotResult;
+import io.papermc.lib.features.multischeduler.models.Scheduler;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -15,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 import java.util.concurrent.CompletableFuture;
@@ -35,7 +34,9 @@ public class PaperLib {
     private static Environment ENVIRONMENT = initialize();
 
     private static Environment initialize() {
-        if (hasClass("com.destroystokyo.paper.PaperConfig") || hasClass("io.papermc.paper.configuration.Configuration")) {
+        if (hasClass("io.papermc.paper.threadedregions.RegionizedServer")) {
+            return new FoliaEnvironment();
+        } else if (hasClass("com.destroystokyo.paper.PaperConfig") || hasClass("io.papermc.paper.configuration.Configuration")) {
             return new PaperEnvironment();
         } else if (hasClass("org.spigotmc.SpigotConfig")) {
             return new SpigotEnvironment();
@@ -273,6 +274,14 @@ public class PaperLib {
      */
     public static int getMinecraftReleaseCandidateVersion() {
         return ENVIRONMENT.getMinecraftReleaseCandidateVersion();
+    }
+
+    /**
+     * Allows you to use Bukkit or Folia schedulers.
+     * @return The list of task you can use.
+     */
+    public static @Nullable Scheduler getScheduler() {
+        return ENVIRONMENT.getScheduler();
     }
 
     /**

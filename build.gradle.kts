@@ -9,7 +9,7 @@ val jar by tasks.existing
 group = "io.papermc"
 version = "1.0.9-SNAPSHOT"
 
-val mcVersion = "1.17.1-R0.1-SNAPSHOT"
+val mcVersion = "1.20.4-R0.1-SNAPSHOT"
 
 repositories {
     mavenCentral()

@@ -19,6 +19,9 @@ import io.papermc.lib.features.inventoryholdersnapshot.InventoryHolderSnapshot;
 import io.papermc.lib.features.inventoryholdersnapshot.InventoryHolderSnapshotBeforeSnapshots;
 import io.papermc.lib.features.inventoryholdersnapshot.InventoryHolderSnapshotNoOption;
 import io.papermc.lib.features.inventoryholdersnapshot.InventoryHolderSnapshotResult;
+import io.papermc.lib.features.multischeduler.folia.FoliaScheduler;
+import io.papermc.lib.features.multischeduler.legacy.LegacyScheduler;
+import io.papermc.lib.features.multischeduler.models.Scheduler;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -28,6 +31,8 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.regex.MatchResult;
@@ -48,12 +53,17 @@ public abstract class Environment {
     protected BlockStateSnapshot blockStateSnapshotHandler;
     protected InventoryHolderSnapshot inventoryHolderSnapshotHandler;
     protected BedSpawnLocation bedSpawnLocationHandler = new BedSpawnLocationSync();
+    protected Scheduler scheduler = null;
 
     public Environment() {
-        this(Bukkit.getVersion());
+        this(Bukkit.getVersion(), null);
     }
 
-    Environment(final String bukkitVersion) {
+    public Environment(Plugin plugin) {
+        this(Bukkit.getVersion(), plugin);
+    }
+
+    Environment(final String bukkitVersion, Plugin plugin) {
         Pattern versionPattern = Pattern.compile("(?i)\\(MC: (\\d)\\.(\\d+)\\.?(\\d+?)?(?: (Pre-Release|Release Candidate) )?(\\d)?\\)");
         Matcher matcher = versionPattern.matcher(bukkitVersion);
         int version = 0;
@@ -101,6 +111,14 @@ public abstract class Environment {
         } else {
             blockStateSnapshotHandler = new BlockStateSnapshotNoOption();
             inventoryHolderSnapshotHandler = new InventoryHolderSnapshotNoOption();
+        }
+
+        if (plugin != null) {
+            if (isFolia()) {
+                scheduler = new FoliaScheduler(plugin);
+            } else {
+                scheduler = new LegacyScheduler(plugin);
+            }
         }
     }
 
@@ -162,11 +180,19 @@ public abstract class Environment {
         return minecraftReleaseCandidateVersion;
     }
 
+    public @Nullable Scheduler getScheduler() {
+        return scheduler;
+    }
+
     public boolean isSpigot() {
         return false;
     }
 
     public boolean isPaper() {
+        return false;
+    }
+
+    public boolean isFolia() {
         return false;
     }
 }
