@@ -83,12 +83,40 @@ Relocation helps avoid version conflicts with other plugins using PaperLib.
 
 ### Gradle
 
+#### Kotlin DSL (`build.gradle.kts`)
+Repo:
+```kotlin
+repositories {
+    maven {
+        url = uri("https://repo.papermc.io/repository/maven-public/")
+    }
+}
+```
+
+Dependency:
+```kotlin
+dependencies {
+    implementation("io.papermc:paperlib:1.0.8")
+}
+```
+
+Shadow Jar and Relocate:
+```kotlin
+plugins {
+    id("com.gradleup.shadow") version "8.3.3"
+    // Make sure to always use the latest version (https://gradleup.com/shadow/)
+}
+shadowJar {
+    relocate("io.papermc.lib", "[YOUR PLUGIN PACKAGE].paperlib")
+}
+```
+
+#### Groovy DSL (`build.gradle`)
 Repo:
 ```groovy
 repositories {
     maven {
-        name "papermc"
-        url "https://papermc.io/repo/repository/maven-public/"
+        url = uri("https://repo.papermc.io/repository/maven-public/")
     }
 }
 ```
@@ -96,15 +124,15 @@ repositories {
 Dependency:
 ```groovy
 dependencies {
-    implementation "io.papermc:paperlib:1.0.7"
+    implementation "io.papermc:paperlib:1.0.8"
 }
 ```
 
-Shadow Jar and Relocate (Groovy Syntax):
+Shadow Jar and Relocate:
 ```groovy
 plugins {
-  id "com.github.johnrengelman.shadow" version "7.1.0"
-  // Make sure to always use the latest version (https://plugins.gradle.org/plugin/com.github.johnrengelman.shadow)
+    id 'com.gradleup.shadow' version '8.3.3'
+    // Make sure to always use the latest version (https://gradleup.com/shadow/)
 }
 shadowJar {
    relocate "io.papermc.lib", "[YOUR PLUGIN PACKAGE].paperlib"
@@ -117,7 +145,7 @@ Repo:
 <repositories>
     <repository>
         <id>papermc</id>
-        <url>https://papermc.io/repo/repository/maven-public/</url>
+        <url>https://repo.papermc.io/repository/maven-public/</url>
     </repository>
 </repositories>
 ```
@@ -127,7 +155,7 @@ Dependency:
     <dependency>
         <groupId>io.papermc</groupId>
         <artifactId>paperlib</artifactId>
-        <version>1.0.7</version>
+        <version>1.0.8</version>
         <scope>compile</scope>
      </dependency>
  </dependencies>
@@ -140,7 +168,7 @@ Shade & Relocate:
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-shade-plugin</artifactId>
-            <version>3.2.4</version> <!-- Make sure to always use the latest version (https://maven.apache.org/plugins/maven-shade-plugin/) -->
+            <version>3.6.0</version> <!-- Make sure to always use the latest version (https://maven.apache.org/plugins/maven-shade-plugin/) -->
             <configuration>
                 <dependencyReducedPomLocation>${project.build.directory}/dependency-reduced-pom.xml</dependencyReducedPomLocation>
                 <relocations>
