@@ -1,6 +1,11 @@
 # PaperLib
 PaperLib is a plugin library for interfacing with Paper specific APIs (such as async chunk loading), with graceful fallbacks maintaining compatibility with both the Bukkit and Spigot API's.
 
+> [!WARNING]
+> PaperLib was meant as a temporary means of using more powerful Paper API while allowing full compatibility with Spigot as was necessary for a lot of people.
+> Now, you're better off directly targeting Paper and uploading your plugin to one of the many other resource sites, such as
+> [Hangar](https://hangar.papermc.io/), [modrinth](https://modrinth.com/), [BuiltByBit](https://builtbybit.com/), or [Polymart](https://polymart.org/).
+
 ## API
 All API calls can be found as static util methods in the `PaperLib` class.
 
